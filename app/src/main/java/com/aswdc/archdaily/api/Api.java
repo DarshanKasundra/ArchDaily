@@ -1,0 +1,116 @@
+package com.aswdc.archdaily.api;
+
+//import com.aswdc.archdaily.api.models.DefaultResponse;
+//import net.simplifiedcoding.retrofitandroidtutorial.models.LoginResponse;
+//import net.simplifiedcoding.retrofitandroidtutorial.models.UsersResponse;
+
+import com.aswdc.archdaily.models.ApiResponse;
+import com.aswdc.archdaily.models.ApiResponseWhitoutResData;
+
+import okhttp3.MultipartBody;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
+
+public interface Api {
+
+
+    @FormUrlEncoded
+    @POST("signup")
+    Call<ApiResponse> signup(
+            @Field("name") String name,
+            @Field("mobile") String mobile,
+            @Field("email") String email,
+            @Field("password") String password,
+//            @Field("gender") String gender,
+//            @Field("company_name") String company_name,
+//            @Field("web_url") String web_url,
+//            @Field("profession") String profession,
+//            @Field("address") String address,
+            @Field("city") String city,
+            @Field("state") String state,
+            @Field("country") String country,
+            @Field("pin_code") String pin_code
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<ApiResponse> login(
+            @Field("email_or_phones") String email,
+            @Field("password") String password
+    );
+
+
+    @POST("listOfEvent")
+    Call<ApiResponse> geteventlists();
+
+
+    @FormUrlEncoded
+    @POST("eventDetail")
+    Call<ApiResponse> geteventDetail(
+            @Field("event_id") int eventId
+    );
+
+
+
+    @FormUrlEncoded
+    @POST("getUserFiles")
+    Call<ApiResponse> getUserFiles(
+            @Field("user_id") int UserID
+    );
+
+    @FormUrlEncoded
+    @POST("addToMapping")
+    Call<ApiResponseWhitoutResData> getJoinUserInEvent(
+            @Field("event_id") int eventId,
+            @Field("user_id") int userId
+
+    );
+
+    @Multipart
+    @POST("uploadFile")
+    Call<ApiResponseWhitoutResData> uplodeFile(
+            @Field("user_id") int userId,
+            @Field("event_id") int eventId,
+            @Field( "main_file" ) String mainfile  ,
+            @Field( "sub_file" ) String subfile
+
+    );
+
+    @FormUrlEncoded
+    @POST("editUser")
+    Call<ApiResponse> EditeUser(
+            @Field("user_id") int user_id,
+            @Field("name") String name,
+            @Field("mobile") String mobile,
+            @Field("email") String email,
+            @Field("city") String city
+
+    );
+
+    @FormUrlEncoded
+    @POST("addVote")
+    Call<ApiResponse> addVote(
+            @Field("voter_id") String voterID,
+            @Field("to_vote_id") String ToVoteID,
+            @Field("event_id") String EventID,
+            @Field("vote") int Vote
+    );
+
+
+    @FormUrlEncoded
+    @POST("listOfUserdetailOfEvent")
+    Call<ApiResponse> getlistOfUserdetailOfEvent(
+            @Field("event_id") int EventID,
+            @Field("user_id") int user_id
+    );
+
+
+}

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/loginCard"
+    app:cardCornerRadius="@dimen/loginCardRadius"
+    android:elevation="5dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/loginViewsMargin"
+    android:layout_marginBottom="@dimen/loginViewsMargin"
+    android:background="@color/whiteCardColor">
+
+    <LinearLayout
+        style="@style/linearParent"
+        android:layout_gravity="center"
+        android:padding="@dimen/loginViewsMargin">
+
+        <TextView
+            style="@style/headerTextPrimary"
+            android:text="@string/register"
+            android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/editTextName"
+                style="@style/modifiedEditText"
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/editTextMobileNo"
+                style="@style/modifiedEditText"
+                android:maxLength="10"
+                android:inputType="text|phone"
+                android:maxLines="1"
+                android:hint="Mobile Number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/editTextEmail"
+                style="@style/modifiedEditText"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:hint="@string/login_email_hint"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/editTextPassword"
+                style="@style/modifiedEditText"
+                android:hint="@string/login_password_hint"
+                android:maxLines="1"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/editTextConfirmPassword"
+                style="@style/modifiedEditText"
+                android:hint="Confirm Password"
+                android:maxLines="1"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+<!--<LinearLayout-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="horizontal">-->
+
+<!--<RadioGroup-->
+<!--    android:id="@+id/Radiogender"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="horizontal"-->
+<!--    android:layout_marginTop="15dp"-->
+<!--    >-->
+<!--        <RadioButton-->
+<!--            android:id="@+id/radiobuttonMale"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Male"/>-->
+
+<!--        <RadioButton-->
+<!--            android:layout_marginLeft="14dp"-->
+<!--            android:id="@+id/radiobuttonFmale"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Female"/>-->
+<!--</RadioGroup>-->
+<!--</LinearLayout>-->
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/parent"-->
+<!--            android:layout_marginTop="@dimen/signup_text_margin_top">-->
+<!--            <EditText-->
+<!--                android:id="@+id/editTextCompanyName"-->
+<!--                style="@style/modifiedEditText"-->
+<!--                android:hint="Company Name"-->
+<!--                android:maxLines="1"-->
+<!--                android:inputType="text"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/parent"-->
+<!--            android:layout_marginTop="@dimen/signup_text_margin_top">-->
+<!--            <EditText-->
+<!--                android:id="@+id/editTextWeburl"-->
+<!--                style="@style/modifiedEditText"-->
+<!--                android:hint="web url"-->
+<!--                android:maxLines="1"-->
+<!--                android:inputType="text"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/parent"-->
+<!--            android:layout_marginTop="@dimen/signup_text_margin_top">-->
+<!--            <EditText-->
+<!--                android:id="@+id/editTextProfession"-->
+<!--                style="@style/modifiedEditText"-->
+<!--                android:hint="Profession"-->
+<!--                android:maxLines="1"-->
+<!--                android:inputType="text"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/parent"-->
+<!--            android:layout_marginTop="@dimen/signup_text_margin_top">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/editTextAddress"-->
+<!--                style="@style/modifiedEditText"-->
+<!--                android:hint="Address"-->
+<!--                android:inputType="text"-->
+<!--                android:maxLines="1" />-->
+
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextCity"
+                style="@style/modifiedEditText"
+                android:hint="City"
+                android:maxLines="1"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextState"
+                style="@style/modifiedEditText"
+                android:hint="State"
+                android:maxLines="1"
+                android:inputType="text"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextCountry"
+                style="@style/modifiedEditText"
+                android:hint="Country"
+                android:maxLines="1"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+
+            <EditText
+                android:id="@+id/editTextPinCode"
+                style="@style/modifiedEditText"
+                android:hint="Pin Code"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <CheckBox
+                android:id="@+id/checkboxTnC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms and Conditions"
+                android:checked="true"
+                />
+
+            <CheckBox
+                android:id="@+id/checkboxPnP"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Privacy and Policy"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+
+            android:id="@+id/buttonSignup"
+            android:layout_marginTop="20dp"
+            style="@style/loginButton"
+            android:layout_gravity="center"
+            android:text="Register"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            style="@style/parent"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/primaryTextColor"
+            android:text="@string/signup_login_hint"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
