@@ -31,9 +31,12 @@ import com.aswdc.archdaily.storage.SharedPrefManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -147,6 +150,7 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 
     private void updateImage(){
         String Image1 = imageToString();
+//        File file=new File(filePath);
 
         EventDetail eventDetail = new EventDetail();
         SharedPrefManager sfm = SharedPrefManager.getInstance( context );
@@ -155,28 +159,31 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 
         int eventID=getIntent().getIntExtra( eventDetail.getEventId(),0);
 
+
+
+
         Api api = RetrofitClient.getApi().create(Api.class);
-        Call<ApiResponseWhitoutResData> call = api.uplodeFile(pd.getUserId(),eventID ,file_path,Image1);
-        call.enqueue( new Callback<ApiResponseWhitoutResData>() {
-            @Override
-            public void onResponse(Call<ApiResponseWhitoutResData> call, Response<ApiResponseWhitoutResData> response) {
-                Log.d( "image",""+eventID );
-                Log.d( "pic",""+Image1 );
-
-                if (response.body().getResCode()  ==  1){
-                    Toast.makeText( PopActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG ).show();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponseWhitoutResData> call, Throwable t) {
-                Log.d( "fail",""+t.getLocalizedMessage() );
-
-
-            }
-        } );
+//        Call<ApiResponseWhitoutResData> call = api.uplodeFile(pd.getUserId(),eventID ,"file_path","Image1");
+//        call.enqueue( new Callback<ApiResponseWhitoutResData>() {
+//            @Override
+//            public void onResponse(Call<ApiResponseWhitoutResData> call, Response<ApiResponseWhitoutResData> response) {
+//                Log.d( "eentid",""+eventID );
+//                Log.d( "pic",""+Image1 );
+//
+//                if (response.body().getResCode()  ==  1){
+//                    Toast.makeText( PopActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG ).show();
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ApiResponseWhitoutResData> call, Throwable t) {
+//                Log.d( "fail",""+t.getLocalizedMessage() );
+//
+//
+//            }
+//        } );
     }
 
 

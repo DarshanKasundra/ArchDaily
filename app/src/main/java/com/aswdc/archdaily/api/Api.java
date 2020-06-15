@@ -8,6 +8,7 @@ import com.aswdc.archdaily.models.ApiResponse;
 import com.aswdc.archdaily.models.ApiResponseWhitoutResData;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -77,10 +78,10 @@ public interface Api {
     @Multipart
     @POST("uploadFile")
     Call<ApiResponseWhitoutResData> uplodeFile(
-            @Field("user_id") int userId,
-            @Field("event_id") int eventId,
-            @Field( "main_file" ) String mainfile  ,
-            @Field( "sub_file" ) String subfile
+            @Field("user_id") int UserID,
+            @Field("event_id") int EventID,
+            @Part MultipartBody.Part main_file,
+            @Part MultipartBody.Part sub_file
 
     );
 
@@ -111,6 +112,15 @@ public interface Api {
             @Field("event_id") int EventID,
             @Field("user_id") int user_id
     );
+    @POST("allSubFiles")
+    Call<ApiResponse> getallsubfile();
 
+    @POST("listOfAllWinner")
+    Call<ApiResponse> getlistOfAllWinner();
 
+    @FormUrlEncoded
+    @POST("userWinningList")
+    Call<ApiResponse> getuserWinningList(
+            @Field("user_id") int user_id
+    );
 }

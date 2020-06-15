@@ -2,9 +2,12 @@ package com.aswdc.archdaily.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +38,19 @@ public class ActivitySubFileDetailList extends AppCompatActivity {
         rcvSubFileDetail = findViewById( R.id.rcvSubFileDetail );
         LinearLayoutManager manager = new LinearLayoutManager( context );
         rcvSubFileDetail.setLayoutManager( manager );
+
+        //  set Toolbar  //
+        Toolbar toolbar;
+        TextView toolbartext;
+        toolbar=  findViewById( R.id.toolbar);
+        toolbartext=  findViewById( R.id.toolbartext);
+        toolbartext.setText( "" );
+
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setTitle( "Your Events" );
+        getSupportActionBar().setDisplayShowHomeEnabled( true );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+
         initReference();
 
     }
@@ -57,5 +73,15 @@ public class ActivitySubFileDetailList extends AppCompatActivity {
 
             }
         } );
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                return super.onOptionsItemSelected( item );
+            default:
+                return super.onOptionsItemSelected( item );
+        }
     }
 }

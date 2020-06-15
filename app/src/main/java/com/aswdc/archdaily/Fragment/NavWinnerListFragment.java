@@ -68,8 +68,8 @@ public class NavWinnerListFragment extends Fragment {
     }
     void initializeReference() {
         ViewPageAdapter adapter = new ViewPageAdapter( getChildFragmentManager() );
-        adapter.AddFragment(new SubFileListFragment(), "All" );
-        adapter.AddFragment( new MainFileListFragment(), "You" );
+        adapter.AddFragment(new AllWinnerListFragment(), "All" );
+        adapter.AddFragment( new UserWinnerListFragment(), "You" );
         //adapter setup
         viewPager.setAdapter( adapter );
         tabLayout.setupWithViewPager( viewPager );

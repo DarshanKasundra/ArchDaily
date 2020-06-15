@@ -1,6 +1,7 @@
 package com.aswdc.archdaily.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aswdc.archdaily.Activity.ActivitySubFileDetailList;
 import com.aswdc.archdaily.R;
-import com.aswdc.archdaily.models.MainFile;
+import com.aswdc.archdaily.models.AllWinnerList;
+import com.aswdc.archdaily.models.SubFile;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -20,14 +24,14 @@ import java.util.ArrayList;
 //import net.simplifiedcoding.retrofitandroidtutorial.R;
 //import net.simplifiedcoding.retrofitandroidtutorial.models.User;
 
-public class MainFileAdapter extends RecyclerView.Adapter<MainFileAdapter.UsersViewHolder> {
+public class AllWinnerListAdapter extends RecyclerView.Adapter<AllWinnerListAdapter.UsersViewHolder> {
 
     private Activity activity;
-    private ArrayList<MainFile> mainFiles;
+    private ArrayList<AllWinnerList> allWinnerLists;
 
-    public MainFileAdapter(Activity activity, ArrayList<MainFile> mainFiles) {
+    public AllWinnerListAdapter(Activity activity, ArrayList<AllWinnerList> allWinnerLists) {
         this.activity = activity;
-        this.mainFiles = mainFiles;
+        this.allWinnerLists = allWinnerLists;
     }
 
 //    public HomeEventAdapter(HomeFragment mCtx, List<ListEvent> listEvents) {
@@ -39,26 +43,26 @@ public class MainFileAdapter extends RecyclerView.Adapter<MainFileAdapter.UsersV
     @NonNull
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate( R.layout.recyclerview_main_file_list, parent, false);
+        View view = LayoutInflater.from(activity).inflate( R.layout.recyclerview_all_winner_list, parent, false);
         return new UsersViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
-        holder.txtfileName.setText( mainFiles.get( position ).getMainFile() );
+        holder.textUserNameinWinner.setText( allWinnerLists.get( position ).getName() );
     }
 
     @Override
     public int getItemCount() {
-        return mainFiles.size();
+        return allWinnerLists.size();
     }
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtfileName;
+        TextView textUserNameinWinner;
         public UsersViewHolder(View itemView) {
             super(itemView);
-            txtfileName = itemView.findViewById( R.id.txtfileName );
+            textUserNameinWinner = itemView.findViewById( R.id.textUserNameinWinner );
 
         }
     }

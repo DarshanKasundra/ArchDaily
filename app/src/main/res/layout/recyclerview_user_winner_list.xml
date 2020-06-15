@@ -22,19 +22,11 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:src="@drawable/autocad"/>
-
             <TextView
-                android:id="@+id/txtfileName"
+                android:id="@+id/textwinnwerprize"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:text="file name"
-                android:textColor="@color/Black"
-                android:gravity="center"
                 android:padding="1dp" />
 
 

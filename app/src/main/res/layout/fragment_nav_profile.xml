@@ -93,9 +93,10 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <TextView
+                        android:id="@+id/texteventCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text=""
                         android:textColor="@color/White"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                         />
@@ -115,9 +116,10 @@
                         android:gravity="center_horizontal"
                         android:layout_marginLeft="30dp">
                         <TextView
+                            android:id="@+id/texttotalvote"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2000"
+                            android:text=""
                             android:textColor="@color/White"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                         />
@@ -139,7 +141,7 @@
                         <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text="300"
                         android:textColor="@color/White"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                         />

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +87,7 @@ public class HomeEventUserDetailAdapter extends RecyclerView.Adapter<HomeEventUs
             }
         } );
 
-        holder.textVote.setOnClickListener( view -> {
+        holder.linearlayoutvotebutton.setOnClickListener( view -> {
             SharedPrefManager sfm1 = SharedPrefManager.getInstance( context );
             ProfileDetail pd1 = sfm1.getUser();
 
@@ -121,13 +122,14 @@ public class HomeEventUserDetailAdapter extends RecyclerView.Adapter<HomeEventUs
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textUserName, textUserEmali, textVote, textVoteCount;
+        TextView textUserName, textUserEmali, textVoteCount;
+        LinearLayout linearlayoutvotebutton;
         CircleImageView imgUserList;
 
         public UsersViewHolder(View itemView) {
             super( itemView );
             textVoteCount = itemView.findViewById( R.id.textVoteCount );
-            textVote = itemView.findViewById( R.id.textVote );
+            linearlayoutvotebutton = itemView.findViewById( R.id.linearlayoutvotebutton );
             textUserEmali = itemView.findViewById( R.id.textUserEmali );
             textUserName = itemView.findViewById( R.id.textUserName );
             imgUserList = itemView.findViewById( R.id.imgUserList );

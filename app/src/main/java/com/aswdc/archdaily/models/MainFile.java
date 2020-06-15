@@ -8,6 +8,17 @@ public class MainFile {
     @SerializedName("main_file_path")
     @Expose
     private String mainFilePath;
+    @SerializedName("main_file")
+    @Expose
+    private String mainFile;
+
+    public String getMainFile() {
+        return mainFile;
+    }
+
+    public void setMainFile(String mainFile) {
+        this.mainFile = mainFile;
+    }
 
     public String getMainFilePath() {
         return mainFilePath;

@@ -127,5 +127,64 @@ public List<UserDetail> getUserDetails() {
         this.userDetails = userDetails;
     }
 
+//      Histroy
+    @SerializedName("subfiles_with_user_detail_history")
+    @Expose
+    private List<SubfilesWithUserDetailHistory> subfilesWithUserDetailHistory = null;
+
+    public List<SubfilesWithUserDetailHistory> getSubfilesWithUserDetailHistory() {
+        return subfilesWithUserDetailHistory;
+    }
+
+    public void setSubfilesWithUserDetailHistory(List<SubfilesWithUserDetailHistory> subfilesWithUserDetailHistory) {
+        this.subfilesWithUserDetailHistory = subfilesWithUserDetailHistory;
+    }
+
+// event count and vote count
+    @SerializedName("User_total_vote")
+    @Expose
+    private List<UserTotalVote> userTotalVote = null;
+    @SerializedName("total_event_participate")
+    @Expose
+    private List<TotalEventParticipate> totalEventParticipate = null;
+    public List<UserTotalVote> getUserTotalVote() {
+        return userTotalVote;
+    }
+
+    public void setUserTotalVote(List<UserTotalVote> userTotalVote) {
+        this.userTotalVote = userTotalVote;
+    }
+
+    public List<TotalEventParticipate> getTotalEventParticipate() {
+        return totalEventParticipate;
+    }
+
+    public void setTotalEventParticipate(List<TotalEventParticipate> totalEventParticipate) {
+        this.totalEventParticipate = totalEventParticipate;
+    }
+//  all winner list
+@SerializedName("all_winner_list")
+@Expose
+private List<AllWinnerList> allWinnerList = null;
+
+    public List<AllWinnerList> getAllWinnerList() {
+        return allWinnerList;
+    }
+
+    public void setAllWinnerList(List<AllWinnerList> allWinnerList) {
+        this.allWinnerList = allWinnerList;
+    }
+//  your winning list
+@SerializedName("user_winner_list")
+@Expose
+private List<UserWinnerList> userWinnerList = null;
+
+    public List<UserWinnerList> getUserWinnerList() {
+        return userWinnerList;
+    }
+
+    public void setUserWinnerList(List<UserWinnerList> userWinnerList) {
+        this.userWinnerList = userWinnerList;
+    }
 
 }

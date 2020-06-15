@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         app:itemIconTint="#ffffff"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemTextColor="@color/whiteCardColor"
         app:menu="@menu/bottom_menu" />
 
 </RelativeLayout>

@@ -4,30 +4,29 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aswdc.archdaily.R;
-import com.aswdc.archdaily.models.MainFile;
+import com.aswdc.archdaily.models.UserWinnerList;
 
-import java.util.ArrayList;
+import java.util.List;
 
 //import android.support.annotation.NonNull;
 //import android.support.v7.widget.RecyclerView;
 //import net.simplifiedcoding.retrofitandroidtutorial.R;
 //import net.simplifiedcoding.retrofitandroidtutorial.models.User;
 
-public class MainFileAdapter extends RecyclerView.Adapter<MainFileAdapter.UsersViewHolder> {
+public class UserWinnerListAdapter extends RecyclerView.Adapter<UserWinnerListAdapter.UsersViewHolder> {
 
     private Activity activity;
-    private ArrayList<MainFile> mainFiles;
+    private List<UserWinnerList> userWinnerLists;
 
-    public MainFileAdapter(Activity activity, ArrayList<MainFile> mainFiles) {
+    public UserWinnerListAdapter(Activity activity, List<UserWinnerList> userWinnerLists) {
         this.activity = activity;
-        this.mainFiles = mainFiles;
+        this.userWinnerLists = userWinnerLists;
     }
 
 //    public HomeEventAdapter(HomeFragment mCtx, List<ListEvent> listEvents) {
@@ -39,26 +38,26 @@ public class MainFileAdapter extends RecyclerView.Adapter<MainFileAdapter.UsersV
     @NonNull
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate( R.layout.recyclerview_main_file_list, parent, false);
+        View view = LayoutInflater.from(activity).inflate( R.layout.recyclerview_user_winner_list, parent, false);
         return new UsersViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
-        holder.txtfileName.setText( mainFiles.get( position ).getMainFile() );
+        holder.textwinnwerprize.setText( userWinnerLists.get( position ).getWinningPrize() );
     }
 
     @Override
     public int getItemCount() {
-        return mainFiles.size();
+        return userWinnerLists.size();
     }
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtfileName;
+        TextView textwinnwerprize;
         public UsersViewHolder(View itemView) {
             super(itemView);
-            txtfileName = itemView.findViewById( R.id.txtfileName );
+            textwinnwerprize = itemView.findViewById( R.id.textwinnwerprize );
 
         }
     }

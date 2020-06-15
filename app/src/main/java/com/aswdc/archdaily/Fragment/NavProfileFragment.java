@@ -18,19 +18,33 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aswdc.archdaily.Activity.ActivitySubFileDetailList;
 import com.aswdc.archdaily.Activity.EditProfileActivity;
 import com.aswdc.archdaily.R;
+import com.aswdc.archdaily.adapter.SubFileDetailListAdapter;
 import com.aswdc.archdaily.adapter.ViewPageAdapter;
+import com.aswdc.archdaily.api.Api;
+import com.aswdc.archdaily.api.RetrofitClient;
+import com.aswdc.archdaily.models.ApiResponse;
+import com.aswdc.archdaily.models.EventDetail;
 import com.aswdc.archdaily.models.ProfileDetail;
+import com.aswdc.archdaily.models.SubFile;
+import com.aswdc.archdaily.models.TotalEventParticipate;
+import com.aswdc.archdaily.models.UserTotalVote;
 import com.aswdc.archdaily.storage.SharedPrefManager;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  */
 public class NavProfileFragment extends  Fragment {
-    TextView textUserName ,textPhoneNumber,textEmail,textCity,textState,textCountry,textPincode;
+    TextView textUserName ,textPhoneNumber,textEmail,textCity,textState,textCountry,textPincode,texteventCount,texttotalvote;
     ImageView textEdit;
     CircleImageView imgUserProfilePhoto;
     Button btnLogout;
@@ -58,6 +72,9 @@ public class NavProfileFragment extends  Fragment {
         toolbartext=  view.findViewById(R.id.toolbartext);
         toolbartext.setText( pd.getName());
 
+        texteventCount = view.findViewById(R.id.texteventCount);
+        texttotalvote = view.findViewById(R.id.texttotalvote);
+
         textEdit = view.findViewById(R.id.textEdit);
         btnLogout = view.findViewById(R.id.btnLogout);
         textUserName = view.findViewById( R.id.textUserName );
@@ -78,6 +95,25 @@ public class NavProfileFragment extends  Fragment {
 
 
     void initReference(){
+
+        Api api = RetrofitClient.getApi().create(Api.class);
+        Call<ApiResponse> call = api.getUserFiles(pd.getUserId());
+        call.enqueue( new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                ArrayList<TotalEventParticipate> totalEventParticipates = (ArrayList<TotalEventParticipate>) response.body().getResData().getTotalEventParticipate();
+                ArrayList<UserTotalVote> userTotalVotes = (ArrayList<UserTotalVote>) response.body().getResData().getUserTotalVote();
+
+                texteventCount.setText( totalEventParticipates.get( 0 ).getTotalParticipate() );
+                texttotalvote.setText( userTotalVotes.get( 0 ).getSessionUserTotalVote() );
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+            }
+        } );
+
 
         textEdit.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -108,6 +144,8 @@ public class NavProfileFragment extends  Fragment {
     }
 
     void initializeReference() {
+
+
         ViewPageAdapter adapter = new ViewPageAdapter( getChildFragmentManager() );
 
         //add fragment

@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        style="@style/Style_toolbar_relativeLayout">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/White"
+
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            style="@style/Style_Toolbar" />
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/backButton"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="60dp"-->
+        <!--                    android:layout_marginRight="10dp"-->
+        <!--                    android:src="@drawable/ic_home"/>-->
+        <TextView
+            android:id="@+id/toolbartext"
+            android:text=""
+            style="@style/Style_toolbar_TextView" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -11,8 +33,7 @@
                 android:id="@+id/rcvSubFileDetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="55dp"
-                android:layout_marginTop="60dp">
+                >
             </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

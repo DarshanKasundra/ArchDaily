@@ -1,5 +1,6 @@
 package com.aswdc.archdaily.Activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,11 @@ import com.aswdc.archdaily.models.UserList;
 import com.aswdc.archdaily.storage.SharedPrefManager;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +52,8 @@ public class EventDetailActivity extends AppCompatActivity {
     RecyclerView rcvEventDetail , rcvUserEventDetail ;
     Context context;
     Button btnJoin;
-    TextView textEventName,textFees,textStatus,textStartDate,textEndDate,textDescrotion,textUserName ,textVote,textVoteCount;
+    TextView textEventName,textFees,textStatus,textStartDate,textEndDate,textDescrotion,textUserName ,textVoteCount;
+    LinearLayout linearlayoutvotebutton;
     ImageView imgProjHome ,backButton ;
     EventDetail eventDetail = new EventDetail();
     UserList userDetail = new UserList();
@@ -70,7 +78,7 @@ public class EventDetailActivity extends AppCompatActivity {
         textFees = findViewById( R.id.textFees);
         textStatus = findViewById( R.id.textStatus);
         btnJoin = findViewById( R.id.btnJoin );
-        textVote = findViewById( R.id.textVote );
+        linearlayoutvotebutton = findViewById( R.id.linearlayoutvotebutton );
         textVoteCount = findViewById( R.id.textVoteCount );
 
 //        backButton = findViewById( R.id.backButton );
@@ -208,7 +216,15 @@ public class EventDetailActivity extends AppCompatActivity {
                 textFees.setText( eventDetails.get(0).getFees() );
                 textStatus.setText( eventDetails.get( 0 ).getStatus() );
                 textStartDate.setText( eventDetails.get( 0 ).getStartDate() );
-                textEndDate.setText( eventDetails.get( 0 ).getEndDate() );
+                textEndDate.setText( eventDetails.get( 0 ).getEndDate());
+
+//                String today = eventDetails.get( 0 ).getStatus();//getting date
+//                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");//formating according to my need
+//                String date = formatter.format(today);
+//                textStartDate.setText( date );
+
+
+
 //                textEventName.setText( eventDetails.get( 0 ).getEventName() );
                 Picasso.with( context ).load( eventDetails.get(0).getMainBannerPath() ).fit().centerCrop().into( imgProjHome );
 //                user array list

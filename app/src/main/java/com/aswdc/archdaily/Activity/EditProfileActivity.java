@@ -29,13 +29,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener  {
-
+    SharedPrefManager sfm = SharedPrefManager.getInstance(getApplication());
+    ProfileDetail pd = sfm.getUser();
     private EditText editTextEmail, editTextName, editTextPhoneNumber,editTextCity;
     private EditText editTextCurrentPassword, editTextNewPassword;
             Button btnLogout,buttonSave;
             TextView toolbartextDone;
 
-    private SharedPrefManager sfm;
     Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,20 +75,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 finish();
             }
         } );
-        SharedPrefManager sfm = SharedPrefManager.getInstance(getApplication());
-        ProfileDetail pd = sfm.getUser();
+
         editTextName.setText( pd.getName() );
         editTextPhoneNumber.setText( pd.getMobile() );
         editTextCity.setText( pd.getCity() );
         editTextEmail.setText( pd.getEmail() );
-
         toolbartextDone.setOnClickListener( this );
 
         buttonSave.setOnClickListener(this);
 
     }
 
-    private void updateProfile() {
+     void updateProfile() {
+
+
 
         String name = editTextName.getText().toString().trim();
         String mobile = editTextPhoneNumber.getText().toString().trim();
