@@ -44,7 +44,7 @@ public class UserWinnerListAdapter extends RecyclerView.Adapter<UserWinnerListAd
 
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
-        holder.textwinnwerprize.setText( userWinnerLists.get( position ).getWinningPrize() );
+        holder.textUserNameinWinner.setText( userWinnerLists.get( position ).getWinningPrize() );
     }
 
     @Override
@@ -54,10 +54,10 @@ public class UserWinnerListAdapter extends RecyclerView.Adapter<UserWinnerListAd
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textwinnwerprize;
+        TextView textUserNameinWinner;
         public UsersViewHolder(View itemView) {
             super(itemView);
-            textwinnwerprize = itemView.findViewById( R.id.textwinnwerprize );
+            textUserNameinWinner = itemView.findViewById( R.id.textUserNameinWinner );
 
         }
     }

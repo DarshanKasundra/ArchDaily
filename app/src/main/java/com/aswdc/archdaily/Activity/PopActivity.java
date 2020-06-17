@@ -44,16 +44,17 @@ import retrofit2.Response;
 public class PopActivity extends AppCompatActivity implements View.OnClickListener {
     Button choose_image,choose_DWG;
     ImageView view_image;
-    TextView view_Dwg_File;
+    TextView view_Dwg_File,view_img_name;
     Intent stroge;
-    String file_path=null;
+    String file_path;
     private static final int PICK_IMAGE = 1;
     private static final int PICK_IMAGE2 = 2;
     Context context;
     Button btnUplode;
-    Uri imgpath;
+    Uri uri;
 
-
+    MultipartBody.Part imagepart;
+    MultipartBody.Part filePart;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -71,6 +72,8 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 
         choose_image = findViewById( R.id.choose_image );
         view_image = findViewById( R.id.view_image );
+        view_img_name = findViewById( R.id.view_img_name );
+
 
         choose_DWG = findViewById( R.id.choose_DWG );
         view_Dwg_File = findViewById( R.id.view_Dwg_File );
@@ -121,10 +124,14 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
         {
             case PICK_IMAGE :
                if (resultCode == RESULT_OK) {
-                   imgpath = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap( getContentResolver(), imgpath );
+                   uri = data.getData();
+                   String path = uri.getPath();
+//                   txtPublicKeyPath.setText(path);
+
+                   try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap( getContentResolver(), uri );
                     view_image.setImageBitmap( bitmap );
+//                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file_path);
                     btnUplode.setEnabled( true );
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -138,7 +145,6 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
                     String filePath = data.getData().getPath();
                     view_Dwg_File.setText( file_path );
                     this.file_path=filePath;
-
                     File file=new File(filePath);
                     view_Dwg_File.setText(file.getName());
                 }
@@ -149,41 +155,54 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 
 
     private void updateImage(){
-        String Image1 = imageToString();
-//        File file=new File(filePath);
+
 
         EventDetail eventDetail = new EventDetail();
         SharedPrefManager sfm = SharedPrefManager.getInstance( context );
         ProfileDetail pd = sfm.getUser();
-
-
         int eventID=getIntent().getIntExtra( eventDetail.getEventId(),0);
 
+        RequestBody requestBodyEventID =
+                RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf( eventID ) );
+        RequestBody requestBodyUserID =
+                RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf( pd.getUserId() ) );
+//        int eventID=getIntent().getIntExtra( eventDetail.getEventId(),0);
+//        File file = new File("/storage/emulated/0/Download/Corrections 6.jpg");
 
 
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( file_path ));
+        filePart = MultipartBody.Part.createFormData("main_file", new File( file_path ).getName(), requestFile);
+        Log.d( "file_path:::",""+new File( file_path ).exists() );
+        RequestBody subFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( file_path ));
+        imagepart = MultipartBody.Part.createFormData("sub_file", new File( file_path ).getName(), subFile);
 
+//        imagepart = MultipartBody.Part.createFormData("sub_file", new File(imgpath).getName(), RequestBody.create(MediaType.parse("multipart/form-data"),  new File(imgpath).getName()));
         Api api = RetrofitClient.getApi().create(Api.class);
-//        Call<ApiResponseWhitoutResData> call = api.uplodeFile(pd.getUserId(),eventID ,"file_path","Image1");
-//        call.enqueue( new Callback<ApiResponseWhitoutResData>() {
-//            @Override
-//            public void onResponse(Call<ApiResponseWhitoutResData> call, Response<ApiResponseWhitoutResData> response) {
-//                Log.d( "eentid",""+eventID );
-//                Log.d( "pic",""+Image1 );
-//
-//                if (response.body().getResCode()  ==  1){
-//                    Toast.makeText( PopActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG ).show();
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ApiResponseWhitoutResData> call, Throwable t) {
-//                Log.d( "fail",""+t.getLocalizedMessage() );
-//
-//
-//            }
-//        } );
+        Call<ApiResponseWhitoutResData> call = api.uplodeFile(requestBodyUserID,requestBodyEventID ,imagepart,filePart);
+        call.enqueue( new Callback<ApiResponseWhitoutResData>() {
+            @Override
+            public void onResponse(Call<ApiResponseWhitoutResData> call, Response<ApiResponseWhitoutResData> response) {
+
+                if (response.body().getResCode()  ==  1){
+                    Toast.makeText( PopActivity.this, "hii", Toast.LENGTH_LONG ).show();
+                }
+                else {
+                    Toast.makeText( PopActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG ).show();
+                    Log.d( "userid",""+response.body() );
+//                    Log.d( "eentid",""+requestBodyEventID );
+                    Log.d( "img",""+imagepart );
+                    Log.d( "file",""+filePart );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseWhitoutResData> call, Throwable t) {
+                Log.d( "fail",""+t.getLocalizedMessage() );
+                Toast.makeText( PopActivity.this,"Faild" , Toast.LENGTH_LONG ).show();
+
+
+            }
+        } );
     }
 
 

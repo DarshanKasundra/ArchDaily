@@ -62,19 +62,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayShowHomeEnabled( true );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
-        btnLogout.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPrefManager sfm = SharedPrefManager.getInstance(context);
-                sfm.clear();
 
-                Intent i = new Intent(EditProfileActivity.this, LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                finish();
-            }
-        } );
+
+
 
         editTextName.setText( pd.getName() );
         editTextPhoneNumber.setText( pd.getMobile() );
@@ -82,7 +72,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         editTextEmail.setText( pd.getEmail() );
         toolbartextDone.setOnClickListener( this );
 
-        buttonSave.setOnClickListener(this);
+//        buttonSave.setOnClickListener(this);
 
     }
 
@@ -134,9 +124,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 //                        editTextName.setText(  eventDetails.get(0).getFees() );
                         sfm = SharedPrefManager.getInstance( getApplicationContext() );
                         sfm.saveUser( apiResponse.getResData().getProfileDetails().get( 0 ) );
-
-
-
                         Toast.makeText(EditProfileActivity.this, apiResponse.getResMessage(), Toast.LENGTH_LONG).show();
 //                        getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container ,new AddArchRupeeFragment()).commit();
 
@@ -145,6 +132,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         startActivity( intent );
                     }
                     else {
+                        Toast.makeText(EditProfileActivity.this, apiResponse.getResMessage(), Toast.LENGTH_LONG).show();
 
                     }
 

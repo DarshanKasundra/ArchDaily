@@ -2,15 +2,18 @@ package com.aswdc.archdaily.api;
 
 import android.util.Base64;
 
+import com.aswdc.archdaily.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -36,8 +39,20 @@ public class RetrofitClient {
                 .create();
 
         if (retrofit==null) {
+            OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+            okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+            okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+            okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+                okhttpClientBuilder.addInterceptor(logging);
+            }
+            OkHttpClient client = okhttpClientBuilder.build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client( client )
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }

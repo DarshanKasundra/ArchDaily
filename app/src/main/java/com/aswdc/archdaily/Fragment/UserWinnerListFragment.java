@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aswdc.archdaily.Activity.AutoFitGridLayoutManager;
@@ -67,8 +68,9 @@ public class UserWinnerListFragment extends Fragment {
         progress.setMessage("Wait while loading...");
         progress.setCancelable(false);
         progress.show();
-        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager( context, 360 );
-        rcvUserWinnerList.setLayoutManager( layoutManager );
+        rcvUserWinnerList.setLayoutManager(
+                new GridLayoutManager(getActivity(),
+                        1));
 
         SharedPrefManager sfm = SharedPrefManager.getInstance(context);
         ProfileDetail pd = SharedPrefManager.getInstance(context).getUser();

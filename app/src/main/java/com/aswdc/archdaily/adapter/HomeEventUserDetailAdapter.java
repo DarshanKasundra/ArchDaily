@@ -79,18 +79,12 @@ public class HomeEventUserDetailAdapter extends RecyclerView.Adapter<HomeEventUs
                 intent.putExtra( eventDetail.getEventId(),  eventID);
                 intent.putExtra( listUserEvent.getUserId(), userLists.get(position).getUserId());
                 context.startActivity(intent);
-
-
-
-
-
             }
         } );
 
         holder.linearlayoutvotebutton.setOnClickListener( view -> {
             SharedPrefManager sfm1 = SharedPrefManager.getInstance( context );
             ProfileDetail pd1 = sfm1.getUser();
-
             Api api = RetrofitClient.getApi().create( Api.class );
             Call<ApiResponse> call = api.addVote( String.valueOf( SharedPrefManager.getInstance( context ).getUser().getUserId() ),
                     String.valueOf( userLists.get( position ).getUserId() ),

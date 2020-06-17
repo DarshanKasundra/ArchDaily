@@ -6,42 +6,107 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        card_view:cardElevation="3dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        card_view:cardCornerRadius="0dp"
-        card_view:cardElevation="0dp"
-        card_view:cardMaxElevation="0dp"
-        card_view:contentPadding="0dp">
-
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
-
+            >
             <TextView
-                android:id="@+id/textwinnwerprize"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:padding="1dp" />
+                android:layout_height="wrap_content"
+                android:text="Event Name"
+                android:textStyle="bold"
+                android:textColor="@color/Black"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvName"-->
-<!--                android:text="@string/app_name"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-<!--                android:layout_below="@+id/imageView"/>-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserList"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/rounded_img_shape_bk"
+                        android:src="@drawable/user_profile" />
+                    <TextView
+                        android:id="@+id/textUserNameinWinner"
+                        android:text="User Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="2.5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
 
+                    android:gravity="left">
+                    <TextView
+                        android:id="@+id/textUserName"
+                        android:text="User Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                    <TextView
+                        android:id="@+id/textUserEmali"
+                        android:text="Pateldarshan5381@gmail.com"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                        style="@style/profile_tage_name_style" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearlayoutvotebutton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_img_shape_price_button">
+                    <TextView
+                        android:text="₹ "
+                        android:textStyle="bold"
+                        android:textColor="@color/White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="500"
+                        android:textStyle="bold"
+                        android:textColor="@color/White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
+
+
 
 
     </androidx.cardview.widget.CardView>

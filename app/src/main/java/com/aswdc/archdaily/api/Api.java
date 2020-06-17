@@ -77,9 +77,9 @@ public interface Api {
 
     @Multipart
     @POST("uploadFile")
-    Call<ApiResponseWhitoutResData> uplodeFile(
-            @Field("user_id") int UserID,
-            @Field("event_id") int EventID,
+    Call<ApiResponseWhitoutResData>uplodeFile(
+            @Part("user_id") RequestBody UserID,
+            @Part("event_id") RequestBody EventID,
             @Part MultipartBody.Part main_file,
             @Part MultipartBody.Part sub_file
 
