@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,6 +38,7 @@ import com.aswdc.archdaily.storage.SharedPrefManager;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -191,6 +194,7 @@ public class EventDetailActivity extends AppCompatActivity {
         Call<ApiResponse> call = api.geteventDetail(eventID);
 
         call.enqueue( new Callback<ApiResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 //                Log.d( "Done",""+response.body().getResData().getUserDetail( UserId ) );
@@ -218,11 +222,16 @@ public class EventDetailActivity extends AppCompatActivity {
                 textStartDate.setText( eventDetails.get( 0 ).getStartDate() );
                 textEndDate.setText( eventDetails.get( 0 ).getEndDate());
 
-//                String today = eventDetails.get( 0 ).getStatus();//getting date
-//                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");//formating according to my need
-//                String date = formatter.format(today);
-//                textStartDate.setText( date );
+//                LocalDateTime localDateTime = LocalDateTime.parse(eventDetails.get( 0 ).getStartDate());
 
+
+//                Date today = eventDetails.get( 0 ).getStartDate();//getting date
+//                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");//formating according to my need
+//                String date = formatter.format(localDateTime);
+//                textStartDate.setText( date );
+//                Calendar cal = Calendar.getInstance();
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+//                textStartDate.setText( sdf.format(eventDetails.get( 0 ).getStartDate() ));
 
 
 //                textEventName.setText( eventDetails.get( 0 ).getEventName() );

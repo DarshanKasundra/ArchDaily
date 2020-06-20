@@ -54,7 +54,7 @@ import retrofit2.Response;
 
 /**
  */
-public class NavProfileFragment extends  Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class NavProfileFragment extends  Fragment {
     TextView textUserName ,textPhoneNumber,textEmail,textCity,textState,textCountry,textPincode,texteventCount,texttotalvote;
     ImageView textEdit;
     CircleImageView imgUserProfilePhoto;
@@ -115,16 +115,9 @@ public class NavProfileFragment extends  Fragment implements NavigationView.OnNa
         toolbartext.setText( "Arch Daily" );
 
 
-        drawerLayout= view.findViewById(R.id.drawer_layout);
-        navigationView= view.findViewById(R.id.nav_view);
 
-//        set nevigation drawer
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle( getActivity(),drawerLayout,toolbar, R.string.open,R.string.close );
-        drawerLayout.addDrawerListener( actionBarDrawerToggle );
-        actionBarDrawerToggle.setDrawerIndicatorEnabled( true );
-        actionBarDrawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener( this );
+
 
 
 
@@ -202,47 +195,5 @@ public class NavProfileFragment extends  Fragment implements NavigationView.OnNa
         tabLayout.setupWithViewPager( viewPager );
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_add_rupees:
-                Toast.makeText( getActivity(), "AddArchRuppes", Toast.LENGTH_LONG ).show();
-                Intent intent = new Intent( getActivity(), AddRuppesActivity.class );
-                startActivity( intent );
-                /*FragmentManager fragmentManager = getActivity().getFragmentManager(); // For AppCompat use getSupportFragmentManager
-                fragmentManager.beginTransaction().replace( R.id.fragment_container ,new AddArchRupeeFragment()).commit();*/
-                break;
-            case R.id.nav_wallet_to_bank:
-                Toast.makeText( getActivity(), "Wallet to bank", Toast.LENGTH_LONG ).show();
-                Intent intent1 = new Intent( getActivity(), WalletToBankAcountActivity.class );
-                startActivity( intent1 );
-                break;
-
-            case R.id.nav_passbook:
-                Toast.makeText( getActivity(), "Passbook", Toast.LENGTH_LONG ).show();
-                Intent intent2 = new Intent( getActivity(), PassbookActivity.class );
-                startActivity( intent2 );
-                break;
-            case R.id.nav_add_event:
-                Toast.makeText( getActivity(), "Add Event", Toast.LENGTH_LONG ).show();
-                Intent intent3 = new Intent( getActivity(), AddEventsActivity.class );
-                startActivity( intent3 );
-                break;
-            case R.id.nav_logout:
-                Toast.makeText( getActivity(), "Log Out", Toast.LENGTH_LONG ).show();
-                SharedPrefManager sfm = SharedPrefManager.getInstance(context);
-                sfm.clear();
-
-                Intent i = new Intent( getActivity(), LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                break;
-        }
-
-        drawerLayout.closeDrawer( GravityCompat.START );
-        return true;
-
-    }
 }
 

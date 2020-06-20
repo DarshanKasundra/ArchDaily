@@ -31,8 +31,10 @@ import com.aswdc.archdaily.storage.SharedPrefManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -46,7 +48,9 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
     ImageView view_image;
     TextView view_Dwg_File,view_img_name;
     Intent stroge;
-    String file_path;
+    String main_file_path;
+    String sub_fail_path;
+
     private static final int PICK_IMAGE = 1;
     private static final int PICK_IMAGE2 = 2;
     Context context;
@@ -125,12 +129,15 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
             case PICK_IMAGE :
                if (resultCode == RESULT_OK) {
                    uri = data.getData();
-                   String path = uri.getPath();
-//                   txtPublicKeyPath.setText(path);
+                   String subfilepath = uri.getPath();
 
                    try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap( getContentResolver(), uri );
                     view_image.setImageBitmap( bitmap );
+                       this.sub_fail_path=subfilepath;
+                       File subfile=new File(subfilepath);
+                       Uri yourUri = Uri.fromFile(subfile);
+
 //                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file_path);
                     btnUplode.setEnabled( true );
                 } catch (IOException e) {
@@ -143,8 +150,8 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 //                    String filePath=getRealPathFromUri(data.getData(),MainActivity.this);
 
                     String filePath = data.getData().getPath();
-                    view_Dwg_File.setText( file_path );
-                    this.file_path=filePath;
+                    view_Dwg_File.setText( main_file_path );
+                    this.main_file_path=filePath;
                     File file=new File(filePath);
                     view_Dwg_File.setText(file.getName());
                 }
@@ -170,15 +177,15 @@ public class PopActivity extends AppCompatActivity implements View.OnClickListen
 //        File file = new File("/storage/emulated/0/Download/Corrections 6.jpg");
 
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( file_path ));
-        filePart = MultipartBody.Part.createFormData("main_file", new File( file_path ).getName(), requestFile);
-        Log.d( "file_path:::",""+new File( file_path ).exists() );
-        RequestBody subFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( file_path ));
-        imagepart = MultipartBody.Part.createFormData("sub_file", new File( file_path ).getName(), subFile);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( main_file_path ));
+        filePart = MultipartBody.Part.createFormData("main_file", String.valueOf( new File( main_file_path ) ), requestFile);
+        Log.d( "file_path:::",""+new File( main_file_path ).exists() );
+        RequestBody subFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File( sub_fail_path ));
+        imagepart = MultipartBody.Part.createFormData("sub_file", String.valueOf( new File( sub_fail_path ) ), subFile);
 
 //        imagepart = MultipartBody.Part.createFormData("sub_file", new File(imgpath).getName(), RequestBody.create(MediaType.parse("multipart/form-data"),  new File(imgpath).getName()));
         Api api = RetrofitClient.getApi().create(Api.class);
-        Call<ApiResponseWhitoutResData> call = api.uplodeFile(requestBodyUserID,requestBodyEventID ,imagepart,filePart);
+        Call<ApiResponseWhitoutResData> call = api.uplodeFile(requestBodyUserID,requestBodyEventID ,filePart,imagepart);
         call.enqueue( new Callback<ApiResponseWhitoutResData>() {
             @Override
             public void onResponse(Call<ApiResponseWhitoutResData> call, Response<ApiResponseWhitoutResData> response) {
