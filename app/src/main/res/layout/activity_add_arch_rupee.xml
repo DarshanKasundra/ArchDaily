@@ -9,13 +9,10 @@
         style="@style/Style_toolbar_relativeLayout">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#ffffff"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             style="@style/Style_Toolbar" />
 
         <TextView
             android:id="@+id/toolbartext"
-            android:text=""
             style="@style/Style_toolbar_TextView" />
 
     </RelativeLayout>

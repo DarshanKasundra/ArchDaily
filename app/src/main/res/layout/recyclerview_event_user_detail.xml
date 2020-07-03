@@ -55,14 +55,14 @@
                     android:text="User Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                    android:textColor="@color/Black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 <TextView
                     android:id="@+id/textUserEmali"
                     android:text="Pateldarshan5381@gmail.com"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                    android:textColor="@color/Black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
                     style="@style/profile_tage_name_style" />
             </LinearLayout>
             <LinearLayout
@@ -78,7 +78,7 @@
                     android:text="10"
                     android:textColor="#000000"
                     android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     style="@style/profile_tage_name_style" />
             </LinearLayout>
 

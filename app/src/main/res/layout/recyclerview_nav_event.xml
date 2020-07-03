@@ -24,16 +24,47 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginLeft="10dp">
     <TextView
         android:id="@+id/textViewProjectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ProjectName"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+        android:textColor="@color/Black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_img_shape_status_button"
+            android:gravity="center"
+            android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text=" Prnding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+            android:textColor="@color/White"
+            android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
+
 
 
 
@@ -51,7 +82,7 @@
             <ImageView
                 android:id="@+id/imgProjHome"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_launcher_foreground"/>
 
@@ -61,72 +92,118 @@
                 android:layout_height="1dp"
                 android:background="#C9C9C9"
                 />
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:src="@drawable/ic_favorite_border_black_24dp"-->
-<!--                    android:layout_gravity="fill_vertical"/>-->
-
-<!--                <ImageView-->
-<!--                    android:layout_marginLeft="10dp"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:src="@drawable/ic_chat_bubble_outline_black_24dp"-->
-<!--                    android:layout_gravity="fill_vertical"/>-->
-<!--            </LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_gravity="right">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/view_date_shape_bk"
+
+                >
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingLeft="10dp"
+
                     >
                     <TextView
-                        android:gravity="center_vertical"
+                        android:id="@+id/textDescrotion"
+                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Status : "
-                        android:textColor="#000000"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:gravity="center_vertical"
-                        android:id="@+id/textStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text=" open"
+                        android:text="Entry"
+                        android:textColor="@color/whiteTextColor"
                         android:textStyle="bold"
-                        android:textColor="@color/primaryTextColor"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
                 </LinearLayout>
-                <LinearLayout
-                    android:gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:id="@+id/btnHomeView"
-                        style="@style/loginButton"
-                        android:text="View"
-                        android:textColor="#000000"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="10dp"/>
-                </LinearLayout>
+
+
+
             </LinearLayout>
 
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#C9C9C9"
-                />
+                android:layout_height="wrap_content"
+                android:background="@drawable/view_date_shape2_bk"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginRight="5dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Start : "
+                            android:textColor="@color/Black"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:id="@+id/textStartDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/primaryTextColor"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                    </LinearLayout>
 
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        >
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="End   : "
+                            android:textColor="@color/Black"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:id="@+id/textEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:textColor="@color/primaryTextColor"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C9C9C9"
+                    />
+
+            </LinearLayout>
         </LinearLayout>
 
 

@@ -12,9 +12,6 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:gravity="center"
-            android:background="#ffffff"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             style="@style/Style_Toolbar" >
 
             <LinearLayout
@@ -22,14 +19,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="right">
                 <TextView
-                    android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|right"
                     android:id="@+id/toolbartext1"
-                    android:text="Add Event"
-                    android:textColor="@color/Black"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    style="@style/toolbar_titel_text_style"
+
                     />
             </LinearLayout>
             <LinearLayout

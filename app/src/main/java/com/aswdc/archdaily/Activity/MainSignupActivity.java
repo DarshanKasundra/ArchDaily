@@ -31,8 +31,7 @@ import static android.text.TextUtils.isEmpty;
 
 public class MainSignupActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText editTextName,editTextMobileNo,editTextEmail,editTextPassword,editTextCompanyName,
-    editTextProfession , editTextAddress , editTextCity ,editTextState, editTextCountry ,editTextWeburl, editTextPinCode ,editTextConfirmPassword, textViewLogin;
+    private EditText editTextName,editTextEmail,editTextPassword, editTextConfirmPassword, textViewLogin;
     private RadioButton radiobuttonFmale , radiobuttonMale ;
     private CheckBox checkboxTnC, checkboxPnP ;
     private Button buttonSignup;
@@ -44,8 +43,8 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
 
 
         editTextName = findViewById(R.id.editTextName);
-        editTextMobileNo = findViewById(R.id.editTextMobileNo);
-        editTextEmail = findViewById(R.id.editTextEmail);
+//        editTextMobileNo = findViewById(R.id.editTextMobileNo);
+//        editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
 //        radiobuttonFmale = findViewById(R.id.radiobuttonMale);
@@ -54,10 +53,10 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
 //        editTextWeburl = findViewById(R.id.editTextWeburl);
 //        editTextProfession = findViewById(R.id.editTextProfession);
 //        editTextAddress = findViewById(R.id.editTextAddress);
-        editTextCity = findViewById(R.id.editTextCity);
-        editTextState = findViewById(R.id.editTextState);
-        editTextCountry = findViewById(R.id.editTextCountry);
-        editTextPinCode = findViewById(R.id.editTextPinCode);
+//        editTextCity = findViewById(R.id.editTextCity);
+//        editTextState = findViewById(R.id.editTextState);
+//        editTextCountry = findViewById(R.id.editTextCountry);
+//        editTextPinCode = findViewById(R.id.editTextPinCode);
         checkboxTnC = findViewById(R.id.checkboxTnC);
         checkboxPnP = findViewById(R.id.checkboxPnP);
 //        Radiogender = findViewById(R.id.Radiogender);
@@ -81,8 +80,13 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
 
     private void userSignUp() {
         String name = editTextName.getText().toString().trim();
-        String mobile =  editTextMobileNo.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
+        String mobile = getIntent().getStringExtra( "mobile");
+        String email = getIntent().getStringExtra( "email");
+
+        Log.d( "mobilenumber::3::",""+mobile );
+
+//        String mobile =  editTextMobileNo.getText().toString().trim();
+//        String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String ConfirmPassword = editTextConfirmPassword.getText().toString().trim();
 //        String gender = Radiogender.toString().trim();
@@ -90,10 +94,10 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
 //        String web_url = editTextWeburl.getText().toString().trim();
 //        String profession = editTextProfession.getText().toString().trim();
 //        String address = editTextAddress.getText().toString().trim();
-        String city = editTextCity.getText().toString().trim();
-        String state = editTextState.getText().toString().trim();
-        String country = editTextCountry.getText().toString().trim();
-        String pin_code = editTextPinCode.getText().toString().trim();
+//        String city = editTextCity.getText().toString().trim();
+//        String state = editTextState.getText().toString().trim();
+//        String country = editTextCountry.getText().toString().trim();
+//        String pin_code = editTextPinCode.getText().toString().trim();
 
 
 
@@ -101,26 +105,26 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
             editTextName.setError("Name required");
             return;
         }
-        if(isEmpty(mobile)){
-            editTextMobileNo.setError("Enter Mobile No.");
-            return ;
-        }
-        if (!isValidMobile(mobile))
-        {
-            editTextMobileNo.setError("Enter valid Mobile No.");
-            editTextMobileNo.requestFocus();
-            return ;
-        }
-        if (email.isEmpty()) {
-            editTextEmail.setError("Email is required");
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Enter a valid email");
-            editTextEmail.requestFocus();
-            return;
-        }
+//        if(isEmpty(mobile)){
+//            editTextMobileNo.setError("Enter Mobile No.");
+//            return ;
+//        }
+//        if (!isValidMobile(mobile))
+//        {
+//            editTextMobileNo.setError("Enter valid Mobile No.");
+//            editTextMobileNo.requestFocus();
+//            return ;
+//        }
+//        if (email.isEmpty()) {
+//            editTextEmail.setError("Email is required");
+//            return;
+//        }
+//
+//        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            editTextEmail.setError("Enter a valid email");
+//            editTextEmail.requestFocus();
+//            return;
+//        }
 
         if (password.isEmpty()) {
             editTextPassword.setError("Password required");
@@ -139,11 +143,11 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        if (pin_code.length() != 6) {
-            editTextPinCode.setError("Enter Valid PinCode");
-            editTextPinCode.requestFocus();
-            return;
-        }
+//        if (pin_code.length() != 6) {
+//            editTextPinCode.setError("Enter Valid PinCode");
+//            editTextPinCode.requestFocus();
+//            return;
+//        }
 
 //        if (!checkboxTnC.isChecked()){
 //            checkboxTnC.setError( "please Agree T&c" );
@@ -167,17 +171,22 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
 
 
         Api api = RetrofitClient.getApi().create( Api.class);
-        Call<ApiResponse> call = api.signup(name,mobile,email, password,city,state,country,pin_code);
+        Call<ApiResponse> call = api.signup(name,mobile,email, password);
 
 
 
         call.enqueue( new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                Toast.makeText( MainSignupActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG).show();
+
 
                 if (response.code() == 1)
                 {
+                    Intent intent = new Intent( MainSignupActivity.this, LoginActivity.class);
+                    intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Log.d( "mobilenumber::4::",""+mobile );
+                    Log.d( "email::4::",""+email );
+                    startActivity(intent);
                     Toast.makeText( MainSignupActivity.this, response.body().getResMessage(), Toast.LENGTH_LONG).show();
                 }
 
@@ -186,9 +195,7 @@ public class MainSignupActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText( MainSignupActivity.this, response.body().getResMessage() , Toast.LENGTH_LONG).show();
                 }
 
-                Intent intent = new Intent( MainSignupActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
             }
 
             @Override

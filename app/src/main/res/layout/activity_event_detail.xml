@@ -5,39 +5,76 @@
     android:orientation="vertical"
     android:background="@drawable/home_shape_bk"
     style="@style/loginParent">
-        <RelativeLayout
-            style="@style/Style_toolbar_relativeLayout">
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:background="#ffffff"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    style="@style/Style_Toolbar" />
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/backButton"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="60dp"-->
-                <!--                    android:layout_marginRight="10dp"-->
-                <!--                    android:src="@drawable/ic_home"/>-->
+    <RelativeLayout
+        android:gravity="center"
+        style="@style/Style_toolbar_relativeLayout">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Style_Toolbar">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
                 <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
                     android:id="@+id/toolbartext"
-                    android:text="@string/title_dashboard"
-                    style="@style/Style_toolbar_TextView" />
-        </RelativeLayout>
+                    android:textColor="@color/White"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginRight="10dp">
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
+                    android:id="@+id/toolbartextjoin"
+                    android:textStyle="bold"
+                    android:text="join"
+                    android:textColor="@color/White"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    />
+            </LinearLayout>
+</LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
 
         <LinearLayout style="@style/Style_event_detail_LinearLayout">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                        <View style="@style/style_view" />
+                    android:orientation="vertical"
+                    android:background="@drawable/event_shape_"
+                    >
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+
                             >
+<!--                            <com.zolad.zoominimageview.ZoomInImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="200dp"-->
+<!--                                android:layout_marginTop="5dp"-->
+<!--                                android:src="@drawable/ic_launcher_foreground"/>-->
                                 <ImageView
                                     android:id="@+id/imgProjHome"
                                     android:layout_width="match_parent"
-                                    android:layout_height="180dp"
+                                    android:layout_height="250dp"
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/ic_launcher_foreground"/>
 
@@ -67,7 +104,6 @@
                                             android:id="@+id/textFees"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:text=" open"
                                             android:textStyle="bold"
                                             android:textColor="@color/primaryTextColor"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
@@ -89,163 +125,192 @@
                                             android:text="Status : "
                                             android:textColor="@color/Black"
                                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
                                         <LinearLayout
                                             android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:gravity="center"
-                                            android:background="@drawable/rounded_img_shape_status_button">
-                                        <TextView
-                                            android:gravity="center_vertical"
-                                            android:id="@+id/textStatus"
-                                            android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:text=" Prnding"
-                                            android:layout_gravity="center_vertical"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/White"
-                                            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                                            android:background="@drawable/rounded_img_shape_status_button"
+                                            android:gravity="center">
+
+                                                <TextView
+                                                    android:id="@+id/textStatus"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:gravity="center_vertical"
+                                                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                                                    android:textColor="@color/White"
+                                                    android:textStyle="bold" />
                                         </LinearLayout>
                                 </LinearLayout>
 
 
 
                         </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#C9C9C9"
-                            />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/view_date_shape_bk"
+
+                        >
                         <LinearLayout
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+
+                            >
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Counsling"
+                                android:textColor="@color/whiteTextColor"
+                                android:textStyle="bold"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:background="@drawable/view_date_shape2_bk"
+                        >
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_weight="1"
                                     android:layout_height="match_parent"
                                     android:orientation="horizontal"
-                                    android:paddingLeft="10dp"
-                                    >
-                                        <TextView
-                                            android:gravity="center_vertical"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:text="Start : "
-                                            android:textColor="#000000"
-                                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-                                        <TextView
-                                            android:gravity="center_vertical"
-                                            android:id="@+id/textStartDate"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:text=" 12/6/2020"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/primaryTextColor"
-                                            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                                    android:paddingLeft="10dp">
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            >
+                                                <TextView
+                                                    android:gravity="center_vertical"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:text="Start : "
+                                                    android:textColor="#000000"
+                                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                                                <TextView
+                                                    android:gravity="center_vertical"
+                                                    android:id="@+id/textStartDate"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/primaryTextColor"
+                                                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                                        </LinearLayout>
+
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:paddingLeft="10dp"
+                                            >
+                                                <TextView
+                                                    android:gravity="center_vertical"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:text="End   : "
+                                                    android:textColor="#000000"
+                                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                                                <TextView
+                                                    android:gravity="center_vertical"
+                                                    android:id="@+id/textEndDate"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/primaryTextColor"
+                                                    android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                                        </LinearLayout>
+
+
                                 </LinearLayout>
-
-
-
-
-
-
                         </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#C9C9C9"
-                            />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-
-
-
-
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_gravity="center"
+                            >
                                 <LinearLayout
+                                    android:id="@+id/linearlayoutDescrotion"
+                                    android:gravity="center"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:orientation="horizontal"
-                                    android:paddingLeft="10dp"
-                                    >
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:paddingBottom="5dp"
+                                    android:paddingTop="5dp"
+                                    android:background="@drawable/view_button_shape_bk">
                                         <TextView
-                                            android:gravity="center_vertical"
+                                            android:gravity="center"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:text="End   : "
-                                            android:textColor="#000000"
-                                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-                                        <TextView
-                                            android:gravity="center_vertical"
-                                            android:id="@+id/textEndDate"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:text=" 14/6/2020"
+                                            android:text="Description"
+                                            android:textColor="@color/Black"
                                             android:textStyle="bold"
-                                            android:textColor="@color/primaryTextColor"
-                                            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                                 </LinearLayout>
 
 
 
                         </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#C9C9C9"
-                            />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp">
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:paddingLeft="20dp"
-                                    >
-                                        <TextView
-                                            android:id="@+id/textDescrotion"
-                                            android:gravity="center_vertical"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:text="No Description"
-                                            android:textColor="#000000"
-                                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-                                </LinearLayout>
 
-                        </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#C9C9C9" />
 
-                        <LinearLayout
-                            android:gravity="center"
-                            android:layout_marginRight="20dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                                <Button
-                                    android:id="@+id/btnJoin"
-                                    style="@style/loginButton"
-                                    android:text="Join"
-                                    android:textColor="#000000"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_marginRight="10dp"/>
-                        </LinearLayout>
+<!--                        <LinearLayout-->
+<!--                            android:gravity="center"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            >-->
+<!--                                <Button-->
+<!--                                    android:id="@+id/btnJoin"-->
+<!--                                    style="@style/loginButton"-->
+<!--                                    android:text="Join"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:layout_marginBottom="5dp"-->
+<!--                                    android:layout_marginRight="10dp"/>-->
+<!--                        </LinearLayout>-->
 
 
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#C9C9C9"
-                    />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:background="@drawable/login_shape_bk">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="participate"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+
 
 
 

@@ -6,32 +6,24 @@
     style="@style/loginParent">
     <ScrollView
         style="@style/parent">
-
         <RelativeLayout
             style="@style/parent">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:weightSum="12">
-
                 <LinearLayout
                     style="@style/parent"
                     android:background="@drawable/login_shape_bk"
                     android:orientation="vertical"
                     android:layout_weight="3">
-
                     <ImageView
                         style="@style/parent"
                         android:background="@drawable/ic_login_bk"
                         android:contentDescription="login background" />
-
                 </LinearLayout>
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,10 +38,7 @@
                     android:text="Arch Daily"
                     android:layout_marginTop="40dp"/>
                 <include layout="@layout/layout_login"/>
-
             </LinearLayout>
         </RelativeLayout>
-
     </ScrollView>
-
 </RelativeLayout>

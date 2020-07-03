@@ -20,26 +20,57 @@ import retrofit2.http.Path;
 
 public interface Api {
 
+    @FormUrlEncoded
+    @POST("CheckMailExists")
+    Call<ApiResponseWhitoutResData> getCheckMailExists(
+            @Field("email") String email
+    );
 
+    @FormUrlEncoded
+    @POST("CheckMoileExists")
+    Call<ApiResponseWhitoutResData> getCheckMoileExists(
+            @Field("mobile") String mobile
+    );
+
+    @FormUrlEncoded
+    @POST("CheckUsernameExists")
+    Call<ApiResponseWhitoutResData> CheckUsernameExists(
+            @Field("user_name") String UsreName
+    );
+    @FormUrlEncoded
+    @POST("getOtp")
+    Call<ApiResponse> getOtp(
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("VerifyOtp")
+    Call<ApiResponseWhitoutResData> VerifyOtp(
+            @Field("user_id") int UserId,
+            @Field("otp") int OTP,
+            @Field("otp_for") String OtpFor
+    );
     @FormUrlEncoded
     @POST("signup")
     Call<ApiResponse> signup(
             @Field("name") String name,
             @Field("mobile") String mobile,
             @Field("email") String email,
-            @Field("password") String password,
+            @Field("password") String password
 //            @Field("gender") String gender,
 //            @Field("company_name") String company_name,
 //            @Field("web_url") String web_url,
 //            @Field("profession") String profession,
 //            @Field("address") String address,
-            @Field("city") String city,
-            @Field("state") String state,
-            @Field("country") String country,
-            @Field("pin_code") String pin_code
-
-
+//            @Field("city") String city,
+//            @Field("state") String state,
+//            @Field("country") String country,
+//            @Field("pin_code") String pin_code
     );
+
+
+
+
 
     @FormUrlEncoded
     @POST("login")
@@ -84,6 +115,15 @@ public interface Api {
             @Part MultipartBody.Part sub_file
 
     );
+//    @Multipart
+//    @POST("addSubFile")
+//    Call<ApiResponseWhitoutResData>uplodeFile(
+//            @Part("user_id") RequestBody UserID,
+//            @Part("event_id") RequestBody EventID,
+//            @Part MultipartBody.Part sub_file
+//
+//
+//    );
 
     @FormUrlEncoded
     @POST("editUser")

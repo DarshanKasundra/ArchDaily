@@ -64,11 +64,7 @@ public class MainFileListFragment extends Fragment {
 
 
     void initReference() {
-        ProgressDialog progress = new ProgressDialog( getActivity() );
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
-        progress.setCancelable(false);
-        progress.show();
+
         AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager( context, 360 );
         rcvMainFileList.setLayoutManager( layoutManager );
 
@@ -90,7 +86,6 @@ public class MainFileListFragment extends Fragment {
 
                 rcvMainFileList.setAdapter(new MainFileAdapter( getActivity(), mainFiles ));
 
-                progress.dismiss();
 //                Picasso.with( context ).load( eventDetails.get(0).getMainBannerPath() ).fit().centerCrop().into( imgProjHome );
 
             }

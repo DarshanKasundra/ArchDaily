@@ -5,13 +5,20 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_ios_24</item>
 
+    </style>
+
+    <style name="Theme.MyFancyTheme" parent="android:Theme.Holo">
+        <item name="android:homeAsUpIndicator">@drawable/ic_home</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">false</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_home</item>
+
 
     </style>
 
@@ -86,16 +93,19 @@
 
     <style name="Style_Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
+
+
     </style>
 
     <style name="Style_toolbar_TextView">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Headline</item>
     </style>
 
@@ -109,6 +119,14 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">#C9C9C9</item>
+    </style>
+
+    <style name="toolbar_titel_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
     </style>
 
 </resources>

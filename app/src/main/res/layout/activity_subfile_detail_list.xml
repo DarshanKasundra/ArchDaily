@@ -8,9 +8,6 @@
         style="@style/Style_toolbar_relativeLayout">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="@color/White"
-
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             style="@style/Style_Toolbar" />
         <!--                <ImageView-->
         <!--                    android:id="@+id/backButton"-->
@@ -21,6 +18,8 @@
         <TextView
             android:id="@+id/toolbartext"
             android:text=""
+            android:textColor="@color/White"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             style="@style/Style_toolbar_TextView" />
     </RelativeLayout>
 

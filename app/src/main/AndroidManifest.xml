@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aswdc.archdaily"
     android:versionCode="1"
     android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.SignupUserNameActivity"></activity>
         <activity android:name=".Activity.LoginActivity" />
         <activity
             android:name=".MainNavActivity"
@@ -25,9 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-<!--        <activity android:name=".ManiNavActivity" android:theme="@style/AppTheme.NoActionBar" />-->
+        </activity> <!-- <activity android:name=".ManiNavActivity" android:theme="@style/AppTheme.NoActionBar" /> -->
         <activity android:name=".Activity.MainSignupActivity" />
         <activity android:name=".Activity.EventDetailActivity" />
         <activity android:name=".Activity.ListOfEventOfUserDetail" />
@@ -36,11 +37,11 @@
         <activity android:name=".Activity.PassbookActivity" />
         <activity android:name=".Activity.AddEventsActivity" />
         <activity android:name=".Activity.EmailSignupActivity" />
+        <activity android:name=".Activity.SignupOtpVerifyActivity" />
         <activity android:name=".Activity.ActivitySubFileDetailList" />
-
-        <activity android:name=".Activity.EventDiscriptionActivity"
-            android:theme="@style/AppTheme.CustomeThemme"/>
-
+        <activity
+            android:name=".Activity.EventDiscriptionActivity"
+            android:theme="@style/AppTheme.CustomeThemme" />
         <activity
             android:name=".Activity.PopActivity"
             android:theme="@style/AppTheme.CustomeThemme" />

@@ -19,7 +19,9 @@ import com.aswdc.archdaily.models.ListEvent;
 import com.aswdc.archdaily.models.ProfileDetail;
 import com.aswdc.archdaily.models.SubfilesWithUserDetailHistory;
 import com.aswdc.archdaily.storage.SharedPrefManager;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
+import com.zolad.zoominimageview.ZoomInImageView;
 
 import java.util.ArrayList;
 
@@ -52,8 +54,8 @@ public class NavHomeAdapter extends RecyclerView.Adapter<NavHomeAdapter.UsersVie
 
 
         holder.textUserName.setText( subfilesWithUserDetailHistories.get( position ).getName() );
-
         Picasso.with( context ).load( subfilesWithUserDetailHistories.get( position ).getSubFilePath() ).fit().centerCrop().into( holder.imgProjHome );
+//        Glide.with(context).load(subfilesWithUserDetailHistories.get(position).getSubFilePath()).into(holder.imgProjHome);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class NavHomeAdapter extends RecyclerView.Adapter<NavHomeAdapter.UsersVie
     class UsersViewHolder extends RecyclerView.ViewHolder {
 
         TextView textUserName ;
-        ImageView imgProjHome;
+        ZoomInImageView imgProjHome;
 //        Button btnHomeView;
         public UsersViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +78,9 @@ public class NavHomeAdapter extends RecyclerView.Adapter<NavHomeAdapter.UsersVie
 //            textStatus = itemView.findViewById(R.id.textStatus);
 //            textMaxuser = itemView.findViewById(R.id.textMaxuser);
             imgProjHome = itemView.findViewById( R.id.imgProjHome );
+
+
+
 
         }
     }

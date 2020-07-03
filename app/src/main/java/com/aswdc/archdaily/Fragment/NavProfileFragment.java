@@ -1,16 +1,22 @@
 package com.aswdc.archdaily.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -54,9 +60,8 @@ import retrofit2.Response;
 
 /**
  */
-public class NavProfileFragment extends  Fragment {
+public class NavProfileFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
     TextView textUserName ,textPhoneNumber,textEmail,textCity,textState,textCountry,textPincode,texteventCount,texttotalvote;
-    ImageView textEdit;
     CircleImageView imgUserProfilePhoto;
     Button btnLogout;
     ViewPager viewPager;
@@ -86,16 +91,27 @@ public class NavProfileFragment extends  Fragment {
         super.onViewCreated( view, savedInstanceState );
 
         // Toolbar
-        Toolbar toolbar;
         TextView toolbartext;
         toolbar=  view.findViewById(R.id.toolbar);
         toolbartext=  view.findViewById(R.id.toolbartext);
-        toolbartext.setText( pd.getName());
+        toolbartext.setText( pd.getName() );
+
+//        FInd ID
+        drawerLayout= view.findViewById(R.id.drawer_layout);
+        navigationView= view.findViewById(R.id.nav_view);
+
+//        set nevigation drawer
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle( getActivity(),drawerLayout,toolbar, R.string.open,R.string.close );
+        drawerLayout.addDrawerListener( actionBarDrawerToggle );
+        actionBarDrawerToggle.setDrawerIndicatorEnabled( true );
+        actionBarDrawerToggle.syncState();
+        navigationView.setNavigationItemSelectedListener( this );
+
 
         texteventCount = view.findViewById(R.id.texteventCount);
         texttotalvote = view.findViewById(R.id.texttotalvote);
 
-        textEdit = view.findViewById(R.id.textEdit);
         btnLogout = view.findViewById(R.id.btnLogout);
         textUserName = view.findViewById( R.id.textUserName );
         textPhoneNumber = view.findViewById( R.id.textPhoneNumber );
@@ -110,21 +126,41 @@ public class NavProfileFragment extends  Fragment {
         viewPager = view.findViewById( R.id.viewpager_id );
 
 
-        toolbar=  view.findViewById(R.id.toolbar);
-        toolbartext=  view.findViewById(R.id.toolbartext);
-        toolbartext.setText( "Arch Daily" );
+//        toolbar=  view.findViewById(R.id.toolbar);
+//        toolbartext=  view.findViewById(R.id.toolbartext);
+//        toolbartext.setText( "Arch Daily" );
 
 
 
 
 
 
-
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                // Handle the back button event
+//            }
+//        });
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
 
 
         initializeReference();
         initReference();
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                // Handle the back button event
+//                getChildFragmentManager().beginTransaction().add( R.id.fragment_container ,new NavProfileFragment()).commit();
+//
+//            }
+//        });
+//        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
 
@@ -148,14 +184,19 @@ public class NavProfileFragment extends  Fragment {
             }
         } );
 
-
-        textEdit.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent( getActivity(), EditProfileActivity.class );
-                startActivity(intent);
-            }
-        } );
+//        textEdit.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent( getActivity(), EditProfileActivity.class );
+//                startActivity(intent);
+////                getActivity().finish();
+////
+////                Fragment fragment = getChildFragmentManager().findFragmentByTag(  );
+////                if(fragment != null)
+//          //          getChildFragmentManager().beginTransaction().remove(new NavProfileFragment()).commit();
+//
+//                }
+//        } );
 
 
 
@@ -167,9 +208,6 @@ public class NavProfileFragment extends  Fragment {
         Log.d( "game",""+pd.getUserId() );
 
         textUserName.setText( pd.getName() );
-//        textPhoneNumber.setText( pd.getMobile() );
-//        textEmail.setText( pd.getEmail() );
-//        textCity.setText( pd.getCity() );
         Log.d("profile",""+pd.getEmail());
 //        Picasso.with( context ).load( pd.getProfilePicPath() ).fit().centerCrop().into( imgUserProfilePhoto );
 
@@ -181,18 +219,53 @@ public class NavProfileFragment extends  Fragment {
 
 
         ViewPageAdapter adapter = new ViewPageAdapter( getChildFragmentManager() );
-
-        //add fragment
-//        PhotoListFragment photoListFragment = new PhotoListFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString( String.valueOf( pd.getUserId() ), String.valueOf( getArguments().getInt( String.valueOf( pd.getUserId() )) ) );
-//        photoListFragment.setArguments( bundle );
-
         adapter.AddFragment(new SubFileListFragment(), "Photos" );
         adapter.AddFragment( new MainFileListFragment(), "File" );
         //adapter setup
         viewPager.setAdapter( adapter );
         tabLayout.setupWithViewPager( viewPager );
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_edit:
+                Intent intent = new Intent( getActivity(), EditProfileActivity.class );
+                startActivity( intent );
+                /*FragmentManager fragmentManager = getActivity().getFragmentManager(); // For AppCompat use getSupportFragmentManager
+                fragmentManager.beginTransaction().replace( R.id.fragment_container ,new AddArchRupeeFragment()).commit();*/
+                break;
+            case R.id.nav_wallet_to_bank:
+                Toast.makeText( getActivity(), "Wallet to bank", Toast.LENGTH_LONG ).show();
+                Intent intent1 = new Intent( getActivity(), WalletToBankAcountActivity.class );
+                startActivity( intent1 );
+                break;
+
+            case R.id.nav_passbook:
+                Toast.makeText( getActivity(), "Passbook", Toast.LENGTH_LONG ).show();
+                Intent intent2 = new Intent( getActivity(), PassbookActivity.class );
+                startActivity( intent2 );
+                break;
+            case R.id.nav_add_event:
+                Toast.makeText( getActivity(), "Add Event", Toast.LENGTH_LONG ).show();
+                Intent intent3 = new Intent( getActivity(), AddEventsActivity.class );
+                startActivity( intent3 );
+                break;
+            case R.id.nav_logout:
+                Toast.makeText( getActivity(), "Log Out", Toast.LENGTH_LONG ).show();
+                SharedPrefManager sfm = SharedPrefManager.getInstance(context);
+                sfm.clear();
+
+                Intent i = new Intent( getActivity(), LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                break;
+        }
+
+        drawerLayout.closeDrawer( GravityCompat.START );
+        return true;
+
     }
 
 }

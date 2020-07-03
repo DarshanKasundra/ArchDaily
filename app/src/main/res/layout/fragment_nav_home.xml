@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="?attr/actionBarSize"
                 android:id="@+id/swipeHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="55dp"
-                    android:layout_marginTop="60dp">
+                    android:layout_marginTop="?attr/actionBarSize">
                 </androidx.recyclerview.widget.RecyclerView>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
@@ -62,6 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
+                app:itemTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:headerLayout="@layout/nav_header_navigation_drawer_home_fragment"
                 app:menu="@menu/activity_navigation_drawer_home_fragment_drawer" >
 

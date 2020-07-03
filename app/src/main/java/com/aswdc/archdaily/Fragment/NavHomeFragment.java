@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import com.aswdc.archdaily.api.Api;
 import com.aswdc.archdaily.api.RetrofitClient;
 import com.aswdc.archdaily.models.ListEvent;
 import com.aswdc.archdaily.models.ApiResponse;
+import com.aswdc.archdaily.models.ProfileDetail;
 import com.aswdc.archdaily.models.SubfilesWithUserDetailHistory;
 import com.aswdc.archdaily.storage.SharedPrefManager;
 import com.google.android.material.navigation.NavigationView;
@@ -63,6 +65,11 @@ public class NavHomeFragment extends Fragment implements NavigationView.OnNaviga
     NavigationView navigationView;
     TextView navUserName;
     ImageView backButton;
+    LinearLayoutManager manager;
+
+    Boolean isScrolling = false;
+    int currentItems, totalItems, scrollOutItems;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,12 +84,12 @@ public class NavHomeFragment extends Fragment implements NavigationView.OnNaviga
         toolbar = view.findViewById( R.id.toolbar );
         rcvallSubFileList = view.findViewById( R.id.rcvallSubFileList );
         navUserName  = view.findViewById( R.id.navUserName );
-        LinearLayoutManager manager = new LinearLayoutManager( getActivity() );
-        rcvallSubFileList.setLayoutManager( manager );
 
+                manager = new LinearLayoutManager( getActivity() );
+        rcvallSubFileList.setLayoutManager( manager );
 //        SharedPrefManager sfm = SharedPrefManager.getInstance(getActivity());
 //        ProfileDetail pd = sfm.getUser();
-//
+
 //        navUserName.setText( pd.getCity() );
 
         // Toolbar
@@ -117,34 +124,40 @@ public class NavHomeFragment extends Fragment implements NavigationView.OnNaviga
 
 //        set Progress Dialog
 
-        ProgressDialog progress = new ProgressDialog( getActivity() );
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
-        progress.setCancelable(false);
-        progress.show();
 
-        Api api = RetrofitClient.getApi().create(Api.class);
-        Call<ApiResponse> call = api.getallsubfile();
-        call.enqueue( new Callback<ApiResponse>() {
+
+        SharedPrefManager sfm = SharedPrefManager.getInstance(getActivity());
+        ProfileDetail pd = sfm.getUser();
+
+
+
+
+
+        rcvallSubFileList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                if (response.body().getResCode() == 1) {
-                    ArrayList<SubfilesWithUserDetailHistory> subfilesWithUserDetailHistories = (ArrayList<SubfilesWithUserDetailHistory>) response.body().getResData().getSubfilesWithUserDetailHistory();
-                    rcvallSubFileList.setAdapter(new NavHomeAdapter(getActivity(), subfilesWithUserDetailHistories));
-                }
-                else
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
                 {
-                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+                    isScrolling = true;
                 }
-                progress.dismiss();
             }
             @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Log.d("Z",""+t.getLocalizedMessage());
-                Toast.makeText( getActivity(), t.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
-                progress.dismiss();
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItems = manager.getChildCount();
+                totalItems = manager.getItemCount();
+                scrollOutItems = manager.findFirstVisibleItemPosition();
+
+                if(isScrolling && (currentItems + scrollOutItems == totalItems))
+                {
+                    isScrolling = false;
+                }
             }
-        } );
+        });
+            getData();
+
+//        navUserName.setText("pd.getName() " );
 
 //        Set swipe Refrish
 
@@ -158,19 +171,20 @@ public class NavHomeFragment extends Fragment implements NavigationView.OnNaviga
                     public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                         if (response.body().getResCode() == 1) {
                             ArrayList<SubfilesWithUserDetailHistory> subfilesWithUserDetailHistories = (ArrayList<SubfilesWithUserDetailHistory>) response.body().getResData().getSubfilesWithUserDetailHistory();
-                            rcvallSubFileList.setAdapter(new NavHomeAdapter(getActivity(), subfilesWithUserDetailHistories));
+                            NavHomeAdapter adapter =new NavHomeAdapter( getActivity(),subfilesWithUserDetailHistories );
+                            rcvallSubFileList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+
                         }
                         else
                         {
                             Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
                         }
-                        progress.dismiss();
                     }
                     @Override
                     public void onFailure(Call<ApiResponse> call, Throwable t) {
                         Log.d("Z",""+t.getLocalizedMessage());
                         Toast.makeText( getActivity(), t.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
-                        progress.dismiss();
                     }
                 } );
                 new Handler(  ).postDelayed( new Runnable() {
@@ -179,6 +193,29 @@ public class NavHomeFragment extends Fragment implements NavigationView.OnNaviga
                         swipeHome.setRefreshing( false );
                     }
                 } ,400);
+            }
+        } );
+
+    }
+    void getData(){
+        Api api = RetrofitClient.getApi().create(Api.class);
+        Call<ApiResponse> call = api.getallsubfile();
+        call.enqueue( new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.body().getResCode() == 1) {
+                    ArrayList<SubfilesWithUserDetailHistory> subfilesWithUserDetailHistories = (ArrayList<SubfilesWithUserDetailHistory>) response.body().getResData().getSubfilesWithUserDetailHistory();
+                    rcvallSubFileList.setAdapter(new NavHomeAdapter(getActivity(), subfilesWithUserDetailHistories));
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.d("Z",""+t.getLocalizedMessage());
+                Toast.makeText( getActivity(), t.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
             }
         } );
 

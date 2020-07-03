@@ -37,8 +37,11 @@ import com.aswdc.archdaily.models.UserList;
 import com.aswdc.archdaily.storage.SharedPrefManager;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,13 +57,12 @@ public class EventDetailActivity extends AppCompatActivity {
 
     RecyclerView rcvEventDetail , rcvUserEventDetail ;
     Context context;
-    Button btnJoin;
-    TextView textEventName,textFees,textStatus,textStartDate,textEndDate,textDescrotion,textUserName ,textVoteCount;
-    LinearLayout linearlayoutvotebutton;
+//    Button btnJoin;
+    TextView textEventName,textFees,textStatus,textStartDate,textEndDate,textUserName ,textVoteCount,toolbartextjoin;
+    LinearLayout linearlayoutvotebutton,linearlayoutDescrotion;
     ImageView imgProjHome ,backButton ;
     EventDetail eventDetail = new EventDetail();
-    UserList userDetail = new UserList();
-    public ArrayList<ListEvent> listEvents = new ArrayList<>(  );
+
 
 
 
@@ -75,19 +77,20 @@ public class EventDetailActivity extends AppCompatActivity {
         textEventName = findViewById( R.id.textEventName );
         textStartDate = findViewById( R.id.textStartDate);
         textEndDate = findViewById( R.id.textEndDate);
-        textDescrotion = findViewById( R.id.textDescrotion);
+        linearlayoutDescrotion = findViewById( R.id.linearlayoutDescrotion);
         textUserName = findViewById( R.id.textUserName);
         imgProjHome = findViewById( R.id.imgProjHome );
         textFees = findViewById( R.id.textFees);
         textStatus = findViewById( R.id.textStatus);
-        btnJoin = findViewById( R.id.btnJoin );
+        toolbartextjoin = findViewById( R.id.toolbartextjoin );
+//        btnJoin = findViewById( R.id.btnJoin );
         linearlayoutvotebutton = findViewById( R.id.linearlayoutvotebutton );
         textVoteCount = findViewById( R.id.textVoteCount );
 
 //        backButton = findViewById( R.id.backButton );
 
 
-        textDescrotion.setOnClickListener( new View.OnClickListener() {
+        linearlayoutDescrotion.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent( EventDetailActivity.this , EventDiscriptionActivity.class );
@@ -121,7 +124,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
 
-        btnJoin.setOnClickListener( new View.OnClickListener() {
+        toolbartextjoin.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -208,7 +211,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 TextView toolbartext;
                 toolbar=  findViewById( R.id.toolbar);
                 toolbartext=  findViewById( R.id.toolbartext);
-                toolbartext.setText( "" );
+                toolbartext.setText( eventDetails.get( 0 ).getEventName() );
 
                 setSupportActionBar( toolbar );
                 getSupportActionBar().setTitle( eventDetails.get( 0 ).getEventName() );
@@ -221,6 +224,38 @@ public class EventDetailActivity extends AppCompatActivity {
                 textStatus.setText( eventDetails.get( 0 ).getStatus() );
                 textStartDate.setText( eventDetails.get( 0 ).getStartDate() );
                 textEndDate.setText( eventDetails.get( 0 ).getEndDate());
+
+                String date_s =  eventDetails.get( 0 ).getStartDate();
+                String date_s1 =  eventDetails.get( 0 ).getEndDate();
+
+                SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date date = null;
+                Date date1 = null;
+
+                try {
+                    date = dt.parse(date_s);
+                    date1 = dt.parse(date_s1);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
+                String startdare = dt1.format(date);
+                String enddate = dt1.format(date1);
+                textStartDate.setText( startdare );
+                textEndDate.setText( enddate );
+
+//                String date= eventDetails.get( 0 ).getStartDate();
+//                SimpleDateFormat spf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ");
+////                Date newDate=spf.parse(date);
+//                spf= new SimpleDateFormat("dd MM yyyy");
+//                date = spf.format(newDate);
+
+//                textStartDate.setText( date );
+
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//                LocalDateTime dateTime = LocalDateTime.of(1986, Month.APRIL, 8, 12, 30);
+//                String formattedDateTime = dateTime.format(formatter);
 
 //                LocalDateTime localDateTime = LocalDateTime.parse(eventDetails.get( 0 ).getStartDate());
 

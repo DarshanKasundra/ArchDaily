@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +62,10 @@ public class NavEventFragment extends Fragment {
     TextView navUserName;
     ImageView backButton;
 
+    Boolean isScrolling = false;
+    int currentItems, totalItems, scrollOutItems;
+    LinearLayoutManager manager;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_nav_event, container, false);
@@ -74,7 +79,7 @@ public class NavEventFragment extends Fragment {
         toolbar = view.findViewById( R.id.toolbar );
         rcvListEvent = view.findViewById( R.id.rcvListEvent );
         navUserName  = view.findViewById( R.id.navUserName );
-        LinearLayoutManager manager = new LinearLayoutManager( getActivity() );
+        manager = new LinearLayoutManager( getActivity() );
         rcvListEvent.setLayoutManager( manager );
 
 //        SharedPrefManager sfm = SharedPrefManager.getInstance(getActivity());
@@ -114,36 +119,32 @@ public class NavEventFragment extends Fragment {
 
 //        set Progress Dialog
 
-        ProgressDialog progress = new ProgressDialog( getActivity() );
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
-        progress.setCancelable(false);
-        progress.show();
+        rcvListEvent.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling = true;
+                }
+            }
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItems = manager.getChildCount();
+                totalItems = manager.getItemCount();
+                scrollOutItems = manager.findFirstVisibleItemPosition();
+
+                if(isScrolling && (currentItems + scrollOutItems == totalItems))
+                {
+                    isScrolling = false;
+                }
+            }
+        });
+        getData();
 
 //        Api call
 
-        Api api = RetrofitClient.getApi().create(Api.class);
-        Call<ApiResponse> call = api.geteventlists();
-        call.enqueue( new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                if (response.body().getResCode() == 1) {
-                    ArrayList<ListEvent> List = response.body().getResData().getListEvent();
-                    rcvListEvent.setAdapter(new NavEventAdapter(getActivity(), List));
-                }
-                else
-                {
-                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
-                }
-                progress.dismiss();
-            }
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Log.d("Z",""+t.getLocalizedMessage());
-                Toast.makeText( getActivity(), t.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
-                progress.dismiss();
-            }
-        } );
 
 //        Set swipe Refrish
 
@@ -162,13 +163,11 @@ public class NavEventFragment extends Fragment {
                             Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
 
                         }
-                        progress.dismiss();
                     }
                     @Override
                     public void onFailure(Call<ApiResponse> call, Throwable t) {
                         Log.d("Z",""+t.getLocalizedMessage());
                         Toast.makeText( getActivity(), t.getMessage(), Toast.LENGTH_LONG ).show();
-                        progress.dismiss();
                     }
                 } );
                 new Handler(  ).postDelayed( new Runnable() {
@@ -180,6 +179,32 @@ public class NavEventFragment extends Fragment {
             }
         } );
 //        navUserName.setText( "" );
+
+    }
+
+    private void getData(){
+        Api api = RetrofitClient.getApi().create(Api.class);
+        Call<ApiResponse> call = api.geteventlists();
+        call.enqueue( new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.body().getResCode() == 1) {
+                    ArrayList<ListEvent> List = response.body().getResData().getListEvent();
+                    NavEventAdapter adapter = new NavEventAdapter( getActivity(),List );
+                    rcvListEvent.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.d("Z",""+t.getLocalizedMessage());
+                Toast.makeText( getActivity(), t.getLocalizedMessage(), Toast.LENGTH_LONG ).show();
+            }
+        } );
 
     }
 //    @Override

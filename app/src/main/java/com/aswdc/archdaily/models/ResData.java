@@ -187,4 +187,28 @@ private List<UserWinnerList> userWinnerList = null;
         this.userWinnerList = userWinnerList;
     }
 
+//    genaret opt
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
+    @SerializedName("otp")
+    @Expose
+    private Integer otp;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getOtp() {
+        return otp;
+    }
+
+    public void setOtp(Integer otp) {
+        this.otp = otp;
+    }
+
 }

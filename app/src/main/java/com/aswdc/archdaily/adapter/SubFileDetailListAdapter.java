@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aswdc.archdaily.Activity.EventDetailActivity;
+import com.aswdc.archdaily.Interface.onClickInterface;
 import com.aswdc.archdaily.R;
 import com.aswdc.archdaily.models.EventDetail;
 import com.aswdc.archdaily.models.ListEvent;
@@ -49,8 +50,11 @@ public class SubFileDetailListAdapter extends RecyclerView.Adapter<SubFileDetail
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
         SharedPrefManager sfm = SharedPrefManager.getInstance(context);
         ProfileDetail pd = sfm.getUser();
-        Picasso.with( context ).load( subFiles.get( position ).getSubFilePath() ).fit().centerCrop().into( holder.ImgSubfile );
-        holder.textUserName.setText( pd.getName() );
+//        if(subFiles.get( position ).toString().contains( subFiles.get( position ).getEventFileId() )){
+            Picasso.with( context ).load( subFiles.get( position ).getSubFilePath() ).fit().centerCrop().into( holder.ImgSubfile );
+            holder.textUserName.setText( pd.getName() );
+//        }
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aswdc.archdaily.Interface.onClickInterface;
 import com.aswdc.archdaily.R;
 import com.aswdc.archdaily.adapter.HomeEventUserDetailAdapter;
 import com.aswdc.archdaily.adapter.SubFileDetailListAdapter;
@@ -31,6 +32,8 @@ import retrofit2.Response;
 public class ActivitySubFileDetailList extends AppCompatActivity {
     RecyclerView rcvSubFileDetail;
     Context context;
+    int selecteditem;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -44,36 +47,46 @@ public class ActivitySubFileDetailList extends AppCompatActivity {
         TextView toolbartext;
         toolbar=  findViewById( R.id.toolbar);
         toolbartext=  findViewById( R.id.toolbartext);
-        toolbartext.setText( "" );
+        toolbartext.setText( "Event" );
 
         setSupportActionBar( toolbar );
-        getSupportActionBar().setTitle( "Your Events" );
+        getSupportActionBar().setTitle( "" );
         getSupportActionBar().setDisplayShowHomeEnabled( true );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         initReference();
 
+        selecteditem=getIntent().getIntExtra( "select",0 );
+        rcvSubFileDetail.scrollToPosition( selecteditem );
     }
     void initReference(){
-        SharedPrefManager sfm = SharedPrefManager.getInstance(context);
-        ProfileDetail pd = sfm.getUser();
+                SharedPrefManager sfm = SharedPrefManager.getInstance(context);
+                ProfileDetail pd = sfm.getUser();
 
-        Api api = RetrofitClient.getApi().create(Api.class);
-        Call<ApiResponse> call = api.getUserFiles(pd.getUserId());
-        call.enqueue( new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                ArrayList<SubFile> subFiles = (ArrayList<SubFile>) response.body().getResData().getSubFiles();
+                Api api = RetrofitClient.getApi().create(Api.class);
+                Call<ApiResponse> call = api.getUserFiles(pd.getUserId());
+                call.enqueue( new Callback<ApiResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                        ArrayList<SubFile> subFiles = (ArrayList<SubFile>) response.body().getResData().getSubFiles();
+                        SubFileDetailListAdapter adapter = new SubFileDetailListAdapter(  ActivitySubFileDetailList.this, subFiles  );
+                        rcvSubFileDetail.setAdapter(adapter);
+//                        rcvSubFileDetail.scrollToPosition( subFiles.get( 0 ).getSubFile());
+//                        adapter.notifyDataSetChanged();
 
-                rcvSubFileDetail.setAdapter(new SubFileDetailListAdapter( ActivitySubFileDetailList.this, subFiles ));
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<ApiResponse> call, Throwable t) {
 
-            }
-        } );
-    }
+                    }
+                } );
+
+
+
+
+
+                }
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {

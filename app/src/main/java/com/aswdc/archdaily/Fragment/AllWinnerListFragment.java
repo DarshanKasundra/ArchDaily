@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aswdc.archdaily.Activity.AutoFitGridLayoutManager;
@@ -58,6 +59,8 @@ public class AllWinnerListFragment extends Fragment {
 //        getChildFragmentManager().beginTransaction().add(R.id.filter, new Filter()).commit();
 
         rcvAllWinnerList = view.findViewById( R.id.rcvAllWinnerList );
+        LinearLayoutManager manager = new LinearLayoutManager( getActivity() );
+        rcvAllWinnerList.setLayoutManager( manager );
         initReference();
 
     }
@@ -70,9 +73,11 @@ public class AllWinnerListFragment extends Fragment {
         progress.setMessage("Wait while loading...");
         progress.setCancelable(false);
         progress.show();
-        rcvAllWinnerList.setLayoutManager(
-                new GridLayoutManager(getActivity(),
-                        1));
+
+
+//        rcvAllWinnerList.setLayoutManager(
+//                new GridLayoutManager(getActivity(),
+//                        1));
 //        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager( context, 360 );
 //        rcvAllWinnerList.setLayoutManager( layoutManager );
 
@@ -91,7 +96,6 @@ public class AllWinnerListFragment extends Fragment {
 
 //                event arraylist
                 ArrayList<AllWinnerList> allWinnerLists = (ArrayList<AllWinnerList>) response.body().getResData().getAllWinnerList();
-
                 rcvAllWinnerList.setAdapter(new AllWinnerListAdapter( getActivity(), allWinnerLists ));
 
                 progress.dismiss();
@@ -101,6 +105,7 @@ public class AllWinnerListFragment extends Fragment {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Log.d( "out",""+t.getLocalizedMessage() );
+                progress.dismiss();
 
             }
         } );

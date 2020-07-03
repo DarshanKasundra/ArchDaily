@@ -45,7 +45,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById( R.id.cirLoginButton ).setOnClickListener( this );
         findViewById( R.id.textViewRegister ).setOnClickListener( this );
     }
-
+    @Override
+    public void onBackPressed(){
+        //super.onBackPressed();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -130,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 userLogin();
                 break;
             case R.id.textViewRegister:
-                startActivity( new Intent( this, MainSignupActivity.class ) );
+                startActivity( new Intent( this, EmailSignupActivity.class ) );
                 break;
         }
     }

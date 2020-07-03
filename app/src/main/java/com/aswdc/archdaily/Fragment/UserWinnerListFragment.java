@@ -7,14 +7,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aswdc.archdaily.Activity.AutoFitGridLayoutManager;
+import com.aswdc.archdaily.Activity.LoginActivity;
 import com.aswdc.archdaily.R;
 import com.aswdc.archdaily.adapter.UserWinnerListAdapter;
 import com.aswdc.archdaily.api.Api;
@@ -56,6 +59,8 @@ public class UserWinnerListFragment extends Fragment {
 //        getChildFragmentManager().beginTransaction().add(R.id.filter, new Filter()).commit();
 
         rcvUserWinnerList = view.findViewById( R.id.rcvUserWinnerList );
+        LinearLayoutManager manager = new LinearLayoutManager( getActivity() );
+        rcvUserWinnerList.setLayoutManager( manager );
         initReference();
 
     }
@@ -63,16 +68,16 @@ public class UserWinnerListFragment extends Fragment {
 
 
     void initReference() {
-        ProgressDialog progress = new ProgressDialog( getActivity() );
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
-        progress.setCancelable(false);
-        progress.show();
-        rcvUserWinnerList.setLayoutManager(
-                new GridLayoutManager(getActivity(),
-                        1));
+//        ProgressDialog progress = new ProgressDialog( getActivity() );
+//        progress.setTitle("Loading");
+//        progress.setMessage("Wait while loading...");
+//        progress.setCancelable(false);
+//        progress.show();
+//        rcvUserWinnerList.setLayoutManager(
+//                new GridLayoutManager(getActivity(),
+//                        1));
 
-        SharedPrefManager sfm = SharedPrefManager.getInstance(context);
+//        SharedPrefManager sfm = SharedPrefManager.getInstance(context);
         ProfileDetail pd = SharedPrefManager.getInstance(context).getUser();
 
 //        int UserId=getArguments().getInt( String.valueOf( pd.getUserId() ),0);
@@ -82,17 +87,27 @@ public class UserWinnerListFragment extends Fragment {
         call.enqueue( new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                if (response.code() == 200){
+                    Log.d( "t","hii" );
+
+                    Toast.makeText( getActivity(), response.body().getResMessage(), Toast.LENGTH_LONG ).show();
+
+                }
 //                ArrayList<WinnerList> winnerLists = response.body().getResData().getUserWinnerList();
                 List<UserWinnerList> userWinnerLists = response.body().getResData().getUserWinnerList();
                 rcvUserWinnerList.setAdapter(new UserWinnerListAdapter( getActivity(), userWinnerLists ));
 
-                progress.dismiss();
+
+
+//                progress.dismiss();
 //                Picasso.with( context ).load( eventDetails.get(0).getMainBannerPath() ).fit().centerCrop().into( imgProjHome );
 
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Log.d( "out",""+t.getLocalizedMessage() );
+//                progress.dismiss();
 
             }
         } );

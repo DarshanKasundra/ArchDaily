@@ -52,7 +52,7 @@ public class NavEventAdapter extends RecyclerView.Adapter<NavEventAdapter.UsersV
 
 
 
-        holder.btnHomeView.setOnClickListener( new View.OnClickListener() {
+        holder.itemView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -94,7 +94,7 @@ public class NavEventAdapter extends RecyclerView.Adapter<NavEventAdapter.UsersV
         public UsersViewHolder(View itemView) {
             super(itemView);
 
-            btnHomeView = itemView.findViewById(R.id.btnHomeView);
+//            btnHomeView = itemView.findViewById(R.id.btnHomeView);
 
             textViewProjectName = itemView.findViewById(R.id.textViewProjectName);
 //            textAmount = itemView.findViewById(R.id.textAmount);

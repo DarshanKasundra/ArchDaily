@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -17,22 +17,16 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        app:layout_anchor="@+id/appBarLayout"
-        android:gravity="center"
-        app:layout_anchorGravity="center"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+        style="@style/Style_Toolbar">
 
         <TextView
             android:id="@+id/toolbartext"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="?attr/actionBarSize"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/whiteTextColor"
             android:gravity="center_vertical"
-            android:text=""
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:textColor="#ffffff" />
+        />
     </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 

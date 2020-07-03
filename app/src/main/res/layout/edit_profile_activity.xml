@@ -4,7 +4,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
         <RelativeLayout
             android:gravity="center"
             style="@style/Style_toolbar_relativeLayout">
@@ -12,9 +19,6 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:gravity="center"
-                android:background="#ffffff"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 style="@style/Style_Toolbar" >
 
                 <LinearLayout
@@ -28,7 +32,7 @@
                         android:gravity="center|right"
                         android:id="@+id/toolbartext1"
                         android:text="Edit Profile"
-                        android:textColor="@color/Black"
+                        android:textColor="@color/whiteTextColor"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         />
                 </LinearLayout>
@@ -43,7 +47,7 @@
                         android:gravity="center|right"
                         android:id="@+id/toolbartextDone"
                         android:text="Done"
-                        android:textColor="@color/primaryTextColor"
+                        android:textColor="@color/whiteTextColor"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         />
                 </LinearLayout>
@@ -139,14 +143,7 @@
 
 
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Save "
-                android:textAllCaps="false"
-                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
